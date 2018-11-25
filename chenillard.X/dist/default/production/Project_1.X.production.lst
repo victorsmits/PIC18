@@ -1,0 +1,2796 @@
+
+
+Microchip Technology PIC18 LITE Macro Assembler V2.00 build -1524193055 
+                                                                                               Fri Oct  5 10:55:56 2018
+
+Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 20180527130849
+     1  0000                     
+     2                           ; Version 2.00
+     3                           ; Generated 27/05/2018 GMT
+     4                           
+     5                           ; 
+     6                           ; Copyright © 2018, Microchip Technology Inc. and its subsidiaries ("Microchip")
+     7                           ; All rights reserved.
+     8                           ; 
+     9                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+                                 ip").
+    10                           ; 
+    11                           ; Redistribution and use in source and binary forms, with or without modification, are
+    12                           ; permitted provided that the following conditions are met:
+    13                           ; 
+    14                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+                                 t of
+    15                           ;        conditions and the following disclaimer.
+    16                           ; 
+    17                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+                                 list
+    18                           ;        of conditions and the following disclaimer in the documentation and/or other
+    19                           ;        materials provided with the distribution.
+    20                           ; 
+    21                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+                                 is
+    22                           ;        software without specific prior written permission.
+    23                           ; 
+    24                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+
+    25                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+                                 OR
+    26                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+                                 T,
+    27                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+                                 
+    28                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+                                 
+    29                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+                                 RICT
+    30                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+                                 SE OF
+    31                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    32                           ; 
+    33                           
+    34                           
+    35                           ; 
+    36                           ; Code-generator required, PIC18F46K22 Definitions
+    37                           ; 
+    38  0000                     fsr0 equ 0FE9h
+    39  0000                     fsr0h equ 0FEAh
+    40  0000                     fsr0l equ 0FE9h
+    41  0000                     fsr1 equ 0FE1h
+    42  0000                     fsr1h equ 0FE2h
+    43  0000                     fsr1l equ 0FE1h
+    44  0000                     fsr2 equ 0FD9h
+    45  0000                     fsr2h equ 0FDAh
+    46  0000                     fsr2l equ 0FD9h
+    47  0000                     indf0 equ 0FEFh
+    48  0000                     indf1 equ 0FE7h
+    49  0000                     indf2 equ 0FDFh
+    50  0000                     intcon equ 0FF2h
+    51  0000                     nvmcon equ 00h
+    52  0000                     pcl equ 0FF9h
+    53  0000                     pclath equ 0FFAh
+    54  0000                     pclatu equ 0FFBh
+    55  0000                     plusw0 equ 0FEBh
+    56  0000                     plusw1 equ 0FE3h
+    57  0000                     plusw2 equ 0FDBh
+    58  0000                     postdec0 equ 0FEDh
+    59  0000                     postdec1 equ 0FE5h
+    60  0000                     postdec2 equ 0FDDh
+    61  0000                     postinc0 equ 0FEEh
+    62  0000                     postinc1 equ 0FE6h
+    63  0000                     postinc2 equ 0FDEh
+    64  0000                     preinc0 equ 0FECh
+    65  0000                     preinc1 equ 0FE4h
+    66  0000                     preinc2 equ 0FDCh
+    67  0000                     prod equ 0FF3h
+    68  0000                     prodh equ 0FF4h
+    69  0000                     prodl equ 0FF3h
+    70  0000                     status equ 0FD8h
+    71  0000                     tablat equ 0FF5h
+    72  0000                     tblptr equ 0FF6h
+    73  0000                     tblptrh equ 0FF7h
+    74  0000                     tblptrl equ 0FF6h
+    75  0000                     tblptru equ 0FF8h
+    76  0000                     tosl equ 0FFDh
+    77  0000                     wreg equ 0FE8h
+    78  0000                     
+     2                           opt pagewidth 120
+     3  0000                     byte0	macro	val
+     4                           	(getbyte(val,0))
+     5                           endm
+     6  0000                     byte1	macro	val
+     7                           	(getbyte(val,1))
+     8                           endm
+     9  0000                     byte2	macro	val
+    10                           	(getbyte(val,2))
+    11                           endm
+    12  0000                     byte3	macro	val
+    13                           	(getbyte(val,3))
+    14                           endm
+    15  0000                     byte4	macro	val
+    16                           	(getbyte(val,4))
+    17                           endm
+    18  0000                     byte5	macro	val
+    19                           	(getbyte(val,5))
+    20                           endm
+    21  0000                     byte6	macro	val
+    22                           	(getbyte(val,6))
+    23                           endm
+    24  0000                     byte7	macro	val
+    25                           	(getbyte(val,7))
+    26                           endm
+    27  0000                     getword	macro	val,pos
+    28                           	(((val) >> (8 * pos)) and 0xffff)
+    29                           endm
+    30  0000                     word0	macro	val
+    31                           	(getword(val,0))
+    32                           endm
+    33  0000                     word1	macro	val
+    34                           	(getword(val,2))
+    35                           endm
+    36  0000                     word2	macro	val
+    37                           	(getword(val,4))
+    38                           endm
+    39  0000                     word3	macro	val
+    40                           	(getword(val,6))
+    41                           endm
+    42  0000                     gettword	macro	val,pos
+    43                           	(((val) >> (8 * pos)) and 0xffffff)
+    44                           endm
+    45  0000                     tword0	macro	val
+    46                           	(gettword(val,0))
+    47                           endm
+    48  0000                     tword1	macro	val
+    49                           	(gettword(val,3))
+    50                           endm
+    51  0000                     tword2	macro	val
+    52                           	(gettword(val,6))
+    53                           endm
+    54  0000                     getdword	macro	val,pos
+    55                           	(((val) >> (8 * pos)) and 0xffffffff)
+    56                           endm
+    57  0000                     dword0	macro	val
+    58                           	(getdword(val,0))
+    59                           endm
+    60  0000                     dword1	macro	val
+    61                           	(getdword(val,4))
+    62                           endm
+    63  0000                     clrc   macro
+    64                           	bcf	status,0
+    65                           endm
+    66  0000                     setc   macro
+    67                           	bsf	status,0
+    68                           endm
+    69  0000                     clrz   macro
+    70                           	bcf	status,2
+    71                           endm
+    72  0000                     setz   macro
+    73                           	bsf	status,2
+    74                           endm
+    75  0000                     skipnz macro
+    76                           	btfsc	status,2
+    77                           endm
+    78  0000                     skipz  macro
+    79                           	btfss	status,2
+    80                           endm
+    81  0000                     skipnc macro
+    82                           	btfsc	status,0
+    83                           endm
+    84  0000                     skipc  macro
+    85                           	btfss	status,0
+    86                           endm
+    87  0000                     pushw macro
+    88                           	movwf postinc1
+    89                           endm
+    90  0000                     pushf macro arg1
+    91                           	movff arg1, postinc1
+    92                           endm
+    93  0000                     popw macro
+    94                           	movf postdec1,f
+    95                           	movf indf1,w
+    96                           endm
+    97  0000                     popf macro arg1
+    98                           	movf postdec1,f
+    99                           	movff indf1,arg1
+   100                           endm
+   101  0000                     popfc macro arg1
+   102                           	movff plusw1,arg1
+   103                           	decfsz fsr1,f
+   104                           endm
+   105  0000                     	global	__ramtop
+   106                           	global	__accesstop
+   107                           # 54 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   108                           ANSELA equ 0F38h ;# 
+   109  0000                     # 99 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   110                           ANSELB equ 0F39h ;# 
+   111  0000                     # 149 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   112                           ANSELC equ 0F3Ah ;# 
+   113  0000                     # 200 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   114                           ANSELD equ 0F3Bh ;# 
+   115  0000                     # 262 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   116                           ANSELE equ 0F3Ch ;# 
+   117  0000                     # 294 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   118                           PMD2 equ 0F3Dh ;# 
+   119  0000                     # 332 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   120                           PMD1 equ 0F3Eh ;# 
+   121  0000                     # 397 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   122                           PMD0 equ 0F3Fh ;# 
+   123  0000                     # 474 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   124                           VREFCON2 equ 0F40h ;# 
+   125  0000                     # 479 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   126                           DACCON1 equ 0F40h ;# 
+   127  0000                     # 576 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   128                           VREFCON1 equ 0F41h ;# 
+   129  0000                     # 581 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   130                           DACCON0 equ 0F41h ;# 
+   131  0000                     # 696 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   132                           VREFCON0 equ 0F42h ;# 
+   133  0000                     # 701 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   134                           FVRCON equ 0F42h ;# 
+   135  0000                     # 790 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   136                           CTMUICON equ 0F43h ;# 
+   137  0000                     # 795 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   138                           CTMUICONH equ 0F43h ;# 
+   139  0000                     # 940 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   140                           CTMUCONL equ 0F44h ;# 
+   141  0000                     # 945 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   142                           CTMUCON1 equ 0F44h ;# 
+   143  0000                     # 1094 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   144                           CTMUCONH equ 0F45h ;# 
+   145  0000                     # 1099 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   146                           CTMUCON0 equ 0F45h ;# 
+   147  0000                     # 1206 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   148                           SRCON1 equ 0F46h ;# 
+   149  0000                     # 1268 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   150                           SRCON0 equ 0F47h ;# 
+   151  0000                     # 1339 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   152                           CCPTMRS1 equ 0F48h ;# 
+   153  0000                     # 1391 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   154                           CCPTMRS0 equ 0F49h ;# 
+   155  0000                     # 1465 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   156                           T6CON equ 0F4Ah ;# 
+   157  0000                     # 1536 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   158                           PR6 equ 0F4Bh ;# 
+   159  0000                     # 1556 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   160                           TMR6 equ 0F4Ch ;# 
+   161  0000                     # 1576 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   162                           T5GCON equ 0F4Dh ;# 
+   163  0000                     # 1671 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   164                           T5CON equ 0F4Eh ;# 
+   165  0000                     # 1780 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   166                           TMR5 equ 0F4Fh ;# 
+   167  0000                     # 1787 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   168                           TMR5L equ 0F4Fh ;# 
+   169  0000                     # 1807 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   170                           TMR5H equ 0F50h ;# 
+   171  0000                     # 1827 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   172                           T4CON equ 0F51h ;# 
+   173  0000                     # 1898 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   174                           PR4 equ 0F52h ;# 
+   175  0000                     # 1918 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   176                           TMR4 equ 0F53h ;# 
+   177  0000                     # 1938 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   178                           CCP5CON equ 0F54h ;# 
+   179  0000                     # 2002 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   180                           CCPR5 equ 0F55h ;# 
+   181  0000                     # 2009 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   182                           CCPR5L equ 0F55h ;# 
+   183  0000                     # 2029 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   184                           CCPR5H equ 0F56h ;# 
+   185  0000                     # 2049 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   186                           CCP4CON equ 0F57h ;# 
+   187  0000                     # 2113 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   188                           CCPR4 equ 0F58h ;# 
+   189  0000                     # 2120 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   190                           CCPR4L equ 0F58h ;# 
+   191  0000                     # 2140 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   192                           CCPR4H equ 0F59h ;# 
+   193  0000                     # 2160 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   194                           PSTR3CON equ 0F5Ah ;# 
+   195  0000                     # 2236 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   196                           ECCP3AS equ 0F5Bh ;# 
+   197  0000                     # 2241 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   198                           CCP3AS equ 0F5Bh ;# 
+   199  0000                     # 2478 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   200                           PWM3CON equ 0F5Ch ;# 
+   201  0000                     # 2548 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   202                           CCP3CON equ 0F5Dh ;# 
+   203  0000                     # 2630 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   204                           CCPR3 equ 0F5Eh ;# 
+   205  0000                     # 2637 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   206                           CCPR3L equ 0F5Eh ;# 
+   207  0000                     # 2657 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   208                           CCPR3H equ 0F5Fh ;# 
+   209  0000                     # 2677 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   210                           SLRCON equ 0F60h ;# 
+   211  0000                     # 2721 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   212                           WPUB equ 0F61h ;# 
+   213  0000                     # 2783 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   214                           IOCB equ 0F62h ;# 
+   215  0000                     # 2822 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   216                           PSTR2CON equ 0F63h ;# 
+   217  0000                     # 2962 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   218                           ECCP2AS equ 0F64h ;# 
+   219  0000                     # 2967 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   220                           CCP2AS equ 0F64h ;# 
+   221  0000                     # 3204 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   222                           PWM2CON equ 0F65h ;# 
+   223  0000                     # 3274 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   224                           CCP2CON equ 0F66h ;# 
+   225  0000                     # 3356 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   226                           CCPR2 equ 0F67h ;# 
+   227  0000                     # 3363 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   228                           CCPR2L equ 0F67h ;# 
+   229  0000                     # 3383 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   230                           CCPR2H equ 0F68h ;# 
+   231  0000                     # 3403 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   232                           SSP2CON3 equ 0F69h ;# 
+   233  0000                     # 3465 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   234                           SSP2MSK equ 0F6Ah ;# 
+   235  0000                     # 3535 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   236                           SSP2CON2 equ 0F6Bh ;# 
+   237  0000                     # 3680 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   238                           SSP2CON1 equ 0F6Ch ;# 
+   239  0000                     # 3800 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   240                           SSP2STAT equ 0F6Dh ;# 
+   241  0000                     # 4200 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   242                           SSP2ADD equ 0F6Eh ;# 
+   243  0000                     # 4270 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   244                           SSP2BUF equ 0F6Fh ;# 
+   245  0000                     # 4290 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   246                           BAUDCON2 equ 0F70h ;# 
+   247  0000                     # 4295 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   248                           BAUD2CON equ 0F70h ;# 
+   249  0000                     # 4552 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   250                           RCSTA2 equ 0F71h ;# 
+   251  0000                     # 4557 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   252                           RC2STA equ 0F71h ;# 
+   253  0000                     # 4840 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   254                           TXSTA2 equ 0F72h ;# 
+   255  0000                     # 4845 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   256                           TX2STA equ 0F72h ;# 
+   257  0000                     # 5092 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   258                           TXREG2 equ 0F73h ;# 
+   259  0000                     # 5097 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   260                           TX2REG equ 0F73h ;# 
+   261  0000                     # 5130 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   262                           RCREG2 equ 0F74h ;# 
+   263  0000                     # 5135 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   264                           RC2REG equ 0F74h ;# 
+   265  0000                     # 5168 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   266                           SPBRG2 equ 0F75h ;# 
+   267  0000                     # 5173 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   268                           SP2BRG equ 0F75h ;# 
+   269  0000                     # 5206 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   270                           SPBRGH2 equ 0F76h ;# 
+   271  0000                     # 5211 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   272                           SP2BRGH equ 0F76h ;# 
+   273  0000                     # 5244 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   274                           CM2CON1 equ 0F77h ;# 
+   275  0000                     # 5249 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   276                           CM12CON equ 0F77h ;# 
+   277  0000                     # 5366 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   278                           CM2CON0 equ 0F78h ;# 
+   279  0000                     # 5371 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   280                           CM2CON equ 0F78h ;# 
+   281  0000                     # 5646 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   282                           CM1CON0 equ 0F79h ;# 
+   283  0000                     # 5651 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   284                           CM1CON equ 0F79h ;# 
+   285  0000                     # 6068 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   286                           PIE4 equ 0F7Ah ;# 
+   287  0000                     # 6100 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   288                           PIR4 equ 0F7Bh ;# 
+   289  0000                     # 6132 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   290                           IPR4 equ 0F7Ch ;# 
+   291  0000                     # 6172 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   292                           PIE5 equ 0F7Dh ;# 
+   293  0000                     # 6204 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   294                           PIR5 equ 0F7Eh ;# 
+   295  0000                     # 6236 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   296                           IPR5 equ 0F7Fh ;# 
+   297  0000                     # 6282 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   298                           PORTA equ 0F80h ;# 
+   299  0000                     # 6567 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   300                           PORTB equ 0F81h ;# 
+   301  0000                     # 6837 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   302                           PORTC equ 0F82h ;# 
+   303  0000                     # 7144 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   304                           PORTD equ 0F83h ;# 
+   305  0000                     # 7387 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   306                           PORTE equ 0F84h ;# 
+   307  0000                     # 7562 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   308                           LATA equ 0F89h ;# 
+   309  0000                     # 7674 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   310                           LATB equ 0F8Ah ;# 
+   311  0000                     # 7786 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   312                           LATC equ 0F8Bh ;# 
+   313  0000                     # 7898 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   314                           LATD equ 0F8Ch ;# 
+   315  0000                     # 8010 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   316                           LATE equ 0F8Dh ;# 
+   317  0000                     # 8062 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   318                           TRISA equ 0F92h ;# 
+   319  0000                     # 8067 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   320                           DDRA equ 0F92h ;# 
+   321  0000                     # 8284 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   322                           TRISB equ 0F93h ;# 
+   323  0000                     # 8289 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   324                           DDRB equ 0F93h ;# 
+   325  0000                     # 8506 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   326                           TRISC equ 0F94h ;# 
+   327  0000                     # 8511 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   328                           DDRC equ 0F94h ;# 
+   329  0000                     # 8728 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   330                           TRISD equ 0F95h ;# 
+   331  0000                     # 8733 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   332                           DDRD equ 0F95h ;# 
+   333  0000                     # 8950 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   334                           TRISE equ 0F96h ;# 
+   335  0000                     # 8955 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   336                           DDRE equ 0F96h ;# 
+   337  0000                     # 9066 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   338                           OSCTUNE equ 0F9Bh ;# 
+   339  0000                     # 9136 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   340                           HLVDCON equ 0F9Ch ;# 
+   341  0000                     # 9141 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   342                           LVDCON equ 0F9Ch ;# 
+   343  0000                     # 9416 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   344                           PIE1 equ 0F9Dh ;# 
+   345  0000                     # 9493 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   346                           PIR1 equ 0F9Eh ;# 
+   347  0000                     # 9570 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   348                           IPR1 equ 0F9Fh ;# 
+   349  0000                     # 9647 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   350                           PIE2 equ 0FA0h ;# 
+   351  0000                     # 9733 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   352                           PIR2 equ 0FA1h ;# 
+   353  0000                     # 9819 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   354                           IPR2 equ 0FA2h ;# 
+   355  0000                     # 9905 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   356                           PIE3 equ 0FA3h ;# 
+   357  0000                     # 10015 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   358                           PIR3 equ 0FA4h ;# 
+   359  0000                     # 10093 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   360                           IPR3 equ 0FA5h ;# 
+   361  0000                     # 10171 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   362                           EECON1 equ 0FA6h ;# 
+   363  0000                     # 10237 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   364                           EECON2 equ 0FA7h ;# 
+   365  0000                     # 10257 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   366                           EEDATA equ 0FA8h ;# 
+   367  0000                     # 10277 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   368                           EEADR equ 0FA9h ;# 
+   369  0000                     # 10347 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   370                           EEADRH equ 0FAAh ;# 
+   371  0000                     # 10381 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   372                           RCSTA1 equ 0FABh ;# 
+   373  0000                     # 10386 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   374                           RCSTA equ 0FABh ;# 
+   375  0000                     # 10390 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   376                           RC1STA equ 0FABh ;# 
+   377  0000                     # 10837 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   378                           TXSTA1 equ 0FACh ;# 
+   379  0000                     # 10842 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   380                           TXSTA equ 0FACh ;# 
+   381  0000                     # 10846 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   382                           TX1STA equ 0FACh ;# 
+   383  0000                     # 11212 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   384                           TXREG1 equ 0FADh ;# 
+   385  0000                     # 11217 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   386                           TXREG equ 0FADh ;# 
+   387  0000                     # 11221 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   388                           TX1REG equ 0FADh ;# 
+   389  0000                     # 11290 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   390                           RCREG1 equ 0FAEh ;# 
+   391  0000                     # 11295 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   392                           RCREG equ 0FAEh ;# 
+   393  0000                     # 11299 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   394                           RC1REG equ 0FAEh ;# 
+   395  0000                     # 11368 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   396                           SPBRG1 equ 0FAFh ;# 
+   397  0000                     # 11373 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   398                           SPBRG equ 0FAFh ;# 
+   399  0000                     # 11377 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   400                           SP1BRG equ 0FAFh ;# 
+   401  0000                     # 11446 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   402                           SPBRGH1 equ 0FB0h ;# 
+   403  0000                     # 11451 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   404                           SPBRGH equ 0FB0h ;# 
+   405  0000                     # 11455 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   406                           SP1BRGH equ 0FB0h ;# 
+   407  0000                     # 11524 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   408                           T3CON equ 0FB1h ;# 
+   409  0000                     # 11632 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   410                           TMR3 equ 0FB2h ;# 
+   411  0000                     # 11639 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   412                           TMR3L equ 0FB2h ;# 
+   413  0000                     # 11659 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   414                           TMR3H equ 0FB3h ;# 
+   415  0000                     # 11679 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   416                           T3GCON equ 0FB4h ;# 
+   417  0000                     # 11774 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   418                           ECCP1AS equ 0FB6h ;# 
+   419  0000                     # 11779 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   420                           ECCPAS equ 0FB6h ;# 
+   421  0000                     # 12156 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   422                           PWM1CON equ 0FB7h ;# 
+   423  0000                     # 12161 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   424                           PWMCON equ 0FB7h ;# 
+   425  0000                     # 12410 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   426                           BAUDCON1 equ 0FB8h ;# 
+   427  0000                     # 12415 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   428                           BAUDCON equ 0FB8h ;# 
+   429  0000                     # 12419 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   430                           BAUDCTL equ 0FB8h ;# 
+   431  0000                     # 12423 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   432                           BAUD1CON equ 0FB8h ;# 
+   433  0000                     # 13084 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   434                           PSTR1CON equ 0FB9h ;# 
+   435  0000                     # 13089 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   436                           PSTRCON equ 0FB9h ;# 
+   437  0000                     # 13234 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   438                           T2CON equ 0FBAh ;# 
+   439  0000                     # 13305 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   440                           PR2 equ 0FBBh ;# 
+   441  0000                     # 13325 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   442                           TMR2 equ 0FBCh ;# 
+   443  0000                     # 13345 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   444                           CCP1CON equ 0FBDh ;# 
+   445  0000                     # 13427 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   446                           CCPR1 equ 0FBEh ;# 
+   447  0000                     # 13434 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   448                           CCPR1L equ 0FBEh ;# 
+   449  0000                     # 13454 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   450                           CCPR1H equ 0FBFh ;# 
+   451  0000                     # 13474 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   452                           ADCON2 equ 0FC0h ;# 
+   453  0000                     # 13545 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   454                           ADCON1 equ 0FC1h ;# 
+   455  0000                     # 13613 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   456                           ADCON0 equ 0FC2h ;# 
+   457  0000                     # 13738 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   458                           ADRES equ 0FC3h ;# 
+   459  0000                     # 13745 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   460                           ADRESL equ 0FC3h ;# 
+   461  0000                     # 13765 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   462                           ADRESH equ 0FC4h ;# 
+   463  0000                     # 13785 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   464                           SSP1CON2 equ 0FC5h ;# 
+   465  0000                     # 13790 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   466                           SSPCON2 equ 0FC5h ;# 
+   467  0000                     # 14139 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   468                           SSP1CON1 equ 0FC6h ;# 
+   469  0000                     # 14144 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   470                           SSPCON1 equ 0FC6h ;# 
+   471  0000                     # 14377 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   472                           SSP1STAT equ 0FC7h ;# 
+   473  0000                     # 14382 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   474                           SSPSTAT equ 0FC7h ;# 
+   475  0000                     # 15007 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   476                           SSP1ADD equ 0FC8h ;# 
+   477  0000                     # 15012 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   478                           SSPADD equ 0FC8h ;# 
+   479  0000                     # 15261 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   480                           SSP1BUF equ 0FC9h ;# 
+   481  0000                     # 15266 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   482                           SSPBUF equ 0FC9h ;# 
+   483  0000                     # 15315 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   484                           SSP1MSK equ 0FCAh ;# 
+   485  0000                     # 15320 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   486                           SSPMSK equ 0FCAh ;# 
+   487  0000                     # 15453 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   488                           SSP1CON3 equ 0FCBh ;# 
+   489  0000                     # 15458 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   490                           SSPCON3 equ 0FCBh ;# 
+   491  0000                     # 15575 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   492                           T1GCON equ 0FCCh ;# 
+   493  0000                     # 15670 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   494                           T1CON equ 0FCDh ;# 
+   495  0000                     # 15783 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   496                           TMR1 equ 0FCEh ;# 
+   497  0000                     # 15790 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   498                           TMR1L equ 0FCEh ;# 
+   499  0000                     # 15810 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   500                           TMR1H equ 0FCFh ;# 
+   501  0000                     # 15830 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   502                           RCON equ 0FD0h ;# 
+   503  0000                     # 15963 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   504                           WDTCON equ 0FD1h ;# 
+   505  0000                     # 15991 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   506                           OSCCON2 equ 0FD2h ;# 
+   507  0000                     # 16048 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   508                           OSCCON equ 0FD3h ;# 
+   509  0000                     # 16131 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   510                           T0CON equ 0FD5h ;# 
+   511  0000                     # 16201 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   512                           TMR0 equ 0FD6h ;# 
+   513  0000                     # 16208 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   514                           TMR0L equ 0FD6h ;# 
+   515  0000                     # 16228 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   516                           TMR0H equ 0FD7h ;# 
+   517  0000                     # 16248 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   518                           STATUS equ 0FD8h ;# 
+   519  0000                     # 16319 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   520                           FSR2 equ 0FD9h ;# 
+   521  0000                     # 16326 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   522                           FSR2L equ 0FD9h ;# 
+   523  0000                     # 16346 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   524                           FSR2H equ 0FDAh ;# 
+   525  0000                     # 16353 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   526                           PLUSW2 equ 0FDBh ;# 
+   527  0000                     # 16373 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   528                           PREINC2 equ 0FDCh ;# 
+   529  0000                     # 16393 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   530                           POSTDEC2 equ 0FDDh ;# 
+   531  0000                     # 16413 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   532                           POSTINC2 equ 0FDEh ;# 
+   533  0000                     # 16433 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   534                           INDF2 equ 0FDFh ;# 
+   535  0000                     # 16453 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   536                           BSR equ 0FE0h ;# 
+   537  0000                     # 16460 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   538                           FSR1 equ 0FE1h ;# 
+   539  0000                     # 16467 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   540                           FSR1L equ 0FE1h ;# 
+   541  0000                     # 16487 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   542                           FSR1H equ 0FE2h ;# 
+   543  0000                     # 16494 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   544                           PLUSW1 equ 0FE3h ;# 
+   545  0000                     # 16514 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   546                           PREINC1 equ 0FE4h ;# 
+   547  0000                     # 16534 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   548                           POSTDEC1 equ 0FE5h ;# 
+   549  0000                     # 16554 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   550                           POSTINC1 equ 0FE6h ;# 
+   551  0000                     # 16574 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   552                           INDF1 equ 0FE7h ;# 
+   553  0000                     # 16594 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   554                           WREG equ 0FE8h ;# 
+   555  0000                     # 16632 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   556                           FSR0 equ 0FE9h ;# 
+   557  0000                     # 16639 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   558                           FSR0L equ 0FE9h ;# 
+   559  0000                     # 16659 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   560                           FSR0H equ 0FEAh ;# 
+   561  0000                     # 16666 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   562                           PLUSW0 equ 0FEBh ;# 
+   563  0000                     # 16686 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   564                           PREINC0 equ 0FECh ;# 
+   565  0000                     # 16706 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   566                           POSTDEC0 equ 0FEDh ;# 
+   567  0000                     # 16726 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   568                           POSTINC0 equ 0FEEh ;# 
+   569  0000                     # 16746 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   570                           INDF0 equ 0FEFh ;# 
+   571  0000                     # 16766 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   572                           INTCON3 equ 0FF0h ;# 
+   573  0000                     # 16858 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   574                           INTCON2 equ 0FF1h ;# 
+   575  0000                     # 16928 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   576                           INTCON equ 0FF2h ;# 
+   577  0000                     # 17045 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   578                           PROD equ 0FF3h ;# 
+   579  0000                     # 17052 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   580                           PRODL equ 0FF3h ;# 
+   581  0000                     # 17072 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   582                           PRODH equ 0FF4h ;# 
+   583  0000                     # 17092 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   584                           TABLAT equ 0FF5h ;# 
+   585  0000                     # 17114 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   586                           TBLPTR equ 0FF6h ;# 
+   587  0000                     # 17121 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   588                           TBLPTRL equ 0FF6h ;# 
+   589  0000                     # 17141 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   590                           TBLPTRH equ 0FF7h ;# 
+   591  0000                     # 17161 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   592                           TBLPTRU equ 0FF8h ;# 
+   593  0000                     # 17192 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   594                           PCLAT equ 0FF9h ;# 
+   595  0000                     # 17199 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   596                           PC equ 0FF9h ;# 
+   597  0000                     # 17206 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   598                           PCL equ 0FF9h ;# 
+   599  0000                     # 17226 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   600                           PCLATH equ 0FFAh ;# 
+   601  0000                     # 17246 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   602                           PCLATU equ 0FFBh ;# 
+   603  0000                     # 17253 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   604                           STKPTR equ 0FFCh ;# 
+   605  0000                     # 17359 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   606                           TOS equ 0FFDh ;# 
+   607  0000                     # 17366 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   608                           TOSL equ 0FFDh ;# 
+   609  0000                     # 17386 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   610                           TOSH equ 0FFEh ;# 
+   611  0000                     # 17406 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   612                           TOSU equ 0FFFh ;# 
+   613  0000                     # 54 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   614                           ANSELA equ 0F38h ;# 
+   615  0000                     # 99 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   616                           ANSELB equ 0F39h ;# 
+   617  0000                     # 149 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   618                           ANSELC equ 0F3Ah ;# 
+   619  0000                     # 200 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   620                           ANSELD equ 0F3Bh ;# 
+   621  0000                     # 262 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   622                           ANSELE equ 0F3Ch ;# 
+   623  0000                     # 294 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   624                           PMD2 equ 0F3Dh ;# 
+   625  0000                     # 332 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   626                           PMD1 equ 0F3Eh ;# 
+   627  0000                     # 397 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   628                           PMD0 equ 0F3Fh ;# 
+   629  0000                     # 474 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   630                           VREFCON2 equ 0F40h ;# 
+   631  0000                     # 479 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   632                           DACCON1 equ 0F40h ;# 
+   633  0000                     # 576 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   634                           VREFCON1 equ 0F41h ;# 
+   635  0000                     # 581 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   636                           DACCON0 equ 0F41h ;# 
+   637  0000                     # 696 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   638                           VREFCON0 equ 0F42h ;# 
+   639  0000                     # 701 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   640                           FVRCON equ 0F42h ;# 
+   641  0000                     # 790 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   642                           CTMUICON equ 0F43h ;# 
+   643  0000                     # 795 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   644                           CTMUICONH equ 0F43h ;# 
+   645  0000                     # 940 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   646                           CTMUCONL equ 0F44h ;# 
+   647  0000                     # 945 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   648                           CTMUCON1 equ 0F44h ;# 
+   649  0000                     # 1094 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   650                           CTMUCONH equ 0F45h ;# 
+   651  0000                     # 1099 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   652                           CTMUCON0 equ 0F45h ;# 
+   653  0000                     # 1206 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   654                           SRCON1 equ 0F46h ;# 
+   655  0000                     # 1268 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   656                           SRCON0 equ 0F47h ;# 
+   657  0000                     # 1339 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   658                           CCPTMRS1 equ 0F48h ;# 
+   659  0000                     # 1391 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   660                           CCPTMRS0 equ 0F49h ;# 
+   661  0000                     # 1465 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   662                           T6CON equ 0F4Ah ;# 
+   663  0000                     # 1536 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   664                           PR6 equ 0F4Bh ;# 
+   665  0000                     # 1556 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   666                           TMR6 equ 0F4Ch ;# 
+   667  0000                     # 1576 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   668                           T5GCON equ 0F4Dh ;# 
+   669  0000                     # 1671 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   670                           T5CON equ 0F4Eh ;# 
+   671  0000                     # 1780 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   672                           TMR5 equ 0F4Fh ;# 
+   673  0000                     # 1787 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   674                           TMR5L equ 0F4Fh ;# 
+   675  0000                     # 1807 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   676                           TMR5H equ 0F50h ;# 
+   677  0000                     # 1827 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   678                           T4CON equ 0F51h ;# 
+   679  0000                     # 1898 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   680                           PR4 equ 0F52h ;# 
+   681  0000                     # 1918 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   682                           TMR4 equ 0F53h ;# 
+   683  0000                     # 1938 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   684                           CCP5CON equ 0F54h ;# 
+   685  0000                     # 2002 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   686                           CCPR5 equ 0F55h ;# 
+   687  0000                     # 2009 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   688                           CCPR5L equ 0F55h ;# 
+   689  0000                     # 2029 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   690                           CCPR5H equ 0F56h ;# 
+   691  0000                     # 2049 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   692                           CCP4CON equ 0F57h ;# 
+   693  0000                     # 2113 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   694                           CCPR4 equ 0F58h ;# 
+   695  0000                     # 2120 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   696                           CCPR4L equ 0F58h ;# 
+   697  0000                     # 2140 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   698                           CCPR4H equ 0F59h ;# 
+   699  0000                     # 2160 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   700                           PSTR3CON equ 0F5Ah ;# 
+   701  0000                     # 2236 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   702                           ECCP3AS equ 0F5Bh ;# 
+   703  0000                     # 2241 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   704                           CCP3AS equ 0F5Bh ;# 
+   705  0000                     # 2478 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   706                           PWM3CON equ 0F5Ch ;# 
+   707  0000                     # 2548 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   708                           CCP3CON equ 0F5Dh ;# 
+   709  0000                     # 2630 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   710                           CCPR3 equ 0F5Eh ;# 
+   711  0000                     # 2637 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   712                           CCPR3L equ 0F5Eh ;# 
+   713  0000                     # 2657 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   714                           CCPR3H equ 0F5Fh ;# 
+   715  0000                     # 2677 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   716                           SLRCON equ 0F60h ;# 
+   717  0000                     # 2721 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   718                           WPUB equ 0F61h ;# 
+   719  0000                     # 2783 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   720                           IOCB equ 0F62h ;# 
+   721  0000                     # 2822 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   722                           PSTR2CON equ 0F63h ;# 
+   723  0000                     # 2962 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   724                           ECCP2AS equ 0F64h ;# 
+   725  0000                     # 2967 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   726                           CCP2AS equ 0F64h ;# 
+   727  0000                     # 3204 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   728                           PWM2CON equ 0F65h ;# 
+   729  0000                     # 3274 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   730                           CCP2CON equ 0F66h ;# 
+   731  0000                     # 3356 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   732                           CCPR2 equ 0F67h ;# 
+   733  0000                     # 3363 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   734                           CCPR2L equ 0F67h ;# 
+   735  0000                     # 3383 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   736                           CCPR2H equ 0F68h ;# 
+   737  0000                     # 3403 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   738                           SSP2CON3 equ 0F69h ;# 
+   739  0000                     # 3465 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   740                           SSP2MSK equ 0F6Ah ;# 
+   741  0000                     # 3535 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   742                           SSP2CON2 equ 0F6Bh ;# 
+   743  0000                     # 3680 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   744                           SSP2CON1 equ 0F6Ch ;# 
+   745  0000                     # 3800 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   746                           SSP2STAT equ 0F6Dh ;# 
+   747  0000                     # 4200 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   748                           SSP2ADD equ 0F6Eh ;# 
+   749  0000                     # 4270 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   750                           SSP2BUF equ 0F6Fh ;# 
+   751  0000                     # 4290 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   752                           BAUDCON2 equ 0F70h ;# 
+   753  0000                     # 4295 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   754                           BAUD2CON equ 0F70h ;# 
+   755  0000                     # 4552 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   756                           RCSTA2 equ 0F71h ;# 
+   757  0000                     # 4557 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   758                           RC2STA equ 0F71h ;# 
+   759  0000                     # 4840 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   760                           TXSTA2 equ 0F72h ;# 
+   761  0000                     # 4845 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   762                           TX2STA equ 0F72h ;# 
+   763  0000                     # 5092 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   764                           TXREG2 equ 0F73h ;# 
+   765  0000                     # 5097 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   766                           TX2REG equ 0F73h ;# 
+   767  0000                     # 5130 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   768                           RCREG2 equ 0F74h ;# 
+   769  0000                     # 5135 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   770                           RC2REG equ 0F74h ;# 
+   771  0000                     # 5168 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   772                           SPBRG2 equ 0F75h ;# 
+   773  0000                     # 5173 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   774                           SP2BRG equ 0F75h ;# 
+   775  0000                     # 5206 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   776                           SPBRGH2 equ 0F76h ;# 
+   777  0000                     # 5211 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   778                           SP2BRGH equ 0F76h ;# 
+   779  0000                     # 5244 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   780                           CM2CON1 equ 0F77h ;# 
+   781  0000                     # 5249 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   782                           CM12CON equ 0F77h ;# 
+   783  0000                     # 5366 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   784                           CM2CON0 equ 0F78h ;# 
+   785  0000                     # 5371 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   786                           CM2CON equ 0F78h ;# 
+   787  0000                     # 5646 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   788                           CM1CON0 equ 0F79h ;# 
+   789  0000                     # 5651 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   790                           CM1CON equ 0F79h ;# 
+   791  0000                     # 6068 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   792                           PIE4 equ 0F7Ah ;# 
+   793  0000                     # 6100 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   794                           PIR4 equ 0F7Bh ;# 
+   795  0000                     # 6132 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   796                           IPR4 equ 0F7Ch ;# 
+   797  0000                     # 6172 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   798                           PIE5 equ 0F7Dh ;# 
+   799  0000                     # 6204 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   800                           PIR5 equ 0F7Eh ;# 
+   801  0000                     # 6236 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   802                           IPR5 equ 0F7Fh ;# 
+   803  0000                     # 6282 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   804                           PORTA equ 0F80h ;# 
+   805  0000                     # 6567 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   806                           PORTB equ 0F81h ;# 
+   807  0000                     # 6837 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   808                           PORTC equ 0F82h ;# 
+   809  0000                     # 7144 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   810                           PORTD equ 0F83h ;# 
+   811  0000                     # 7387 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   812                           PORTE equ 0F84h ;# 
+   813  0000                     # 7562 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   814                           LATA equ 0F89h ;# 
+   815  0000                     # 7674 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   816                           LATB equ 0F8Ah ;# 
+   817  0000                     # 7786 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   818                           LATC equ 0F8Bh ;# 
+   819  0000                     # 7898 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   820                           LATD equ 0F8Ch ;# 
+   821  0000                     # 8010 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   822                           LATE equ 0F8Dh ;# 
+   823  0000                     # 8062 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   824                           TRISA equ 0F92h ;# 
+   825  0000                     # 8067 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   826                           DDRA equ 0F92h ;# 
+   827  0000                     # 8284 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   828                           TRISB equ 0F93h ;# 
+   829  0000                     # 8289 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   830                           DDRB equ 0F93h ;# 
+   831  0000                     # 8506 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   832                           TRISC equ 0F94h ;# 
+   833  0000                     # 8511 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   834                           DDRC equ 0F94h ;# 
+   835  0000                     # 8728 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   836                           TRISD equ 0F95h ;# 
+   837  0000                     # 8733 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   838                           DDRD equ 0F95h ;# 
+   839  0000                     # 8950 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   840                           TRISE equ 0F96h ;# 
+   841  0000                     # 8955 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   842                           DDRE equ 0F96h ;# 
+   843  0000                     # 9066 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   844                           OSCTUNE equ 0F9Bh ;# 
+   845  0000                     # 9136 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   846                           HLVDCON equ 0F9Ch ;# 
+   847  0000                     # 9141 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   848                           LVDCON equ 0F9Ch ;# 
+   849  0000                     # 9416 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   850                           PIE1 equ 0F9Dh ;# 
+   851  0000                     # 9493 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   852                           PIR1 equ 0F9Eh ;# 
+   853  0000                     # 9570 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   854                           IPR1 equ 0F9Fh ;# 
+   855  0000                     # 9647 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   856                           PIE2 equ 0FA0h ;# 
+   857  0000                     # 9733 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   858                           PIR2 equ 0FA1h ;# 
+   859  0000                     # 9819 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   860                           IPR2 equ 0FA2h ;# 
+   861  0000                     # 9905 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   862                           PIE3 equ 0FA3h ;# 
+   863  0000                     # 10015 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   864                           PIR3 equ 0FA4h ;# 
+   865  0000                     # 10093 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   866                           IPR3 equ 0FA5h ;# 
+   867  0000                     # 10171 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   868                           EECON1 equ 0FA6h ;# 
+   869  0000                     # 10237 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   870                           EECON2 equ 0FA7h ;# 
+   871  0000                     # 10257 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   872                           EEDATA equ 0FA8h ;# 
+   873  0000                     # 10277 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   874                           EEADR equ 0FA9h ;# 
+   875  0000                     # 10347 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   876                           EEADRH equ 0FAAh ;# 
+   877  0000                     # 10381 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   878                           RCSTA1 equ 0FABh ;# 
+   879  0000                     # 10386 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   880                           RCSTA equ 0FABh ;# 
+   881  0000                     # 10390 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   882                           RC1STA equ 0FABh ;# 
+   883  0000                     # 10837 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   884                           TXSTA1 equ 0FACh ;# 
+   885  0000                     # 10842 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   886                           TXSTA equ 0FACh ;# 
+   887  0000                     # 10846 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   888                           TX1STA equ 0FACh ;# 
+   889  0000                     # 11212 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   890                           TXREG1 equ 0FADh ;# 
+   891  0000                     # 11217 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   892                           TXREG equ 0FADh ;# 
+   893  0000                     # 11221 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   894                           TX1REG equ 0FADh ;# 
+   895  0000                     # 11290 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   896                           RCREG1 equ 0FAEh ;# 
+   897  0000                     # 11295 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   898                           RCREG equ 0FAEh ;# 
+   899  0000                     # 11299 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   900                           RC1REG equ 0FAEh ;# 
+   901  0000                     # 11368 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   902                           SPBRG1 equ 0FAFh ;# 
+   903  0000                     # 11373 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   904                           SPBRG equ 0FAFh ;# 
+   905  0000                     # 11377 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   906                           SP1BRG equ 0FAFh ;# 
+   907  0000                     # 11446 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   908                           SPBRGH1 equ 0FB0h ;# 
+   909  0000                     # 11451 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   910                           SPBRGH equ 0FB0h ;# 
+   911  0000                     # 11455 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   912                           SP1BRGH equ 0FB0h ;# 
+   913  0000                     # 11524 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   914                           T3CON equ 0FB1h ;# 
+   915  0000                     # 11632 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   916                           TMR3 equ 0FB2h ;# 
+   917  0000                     # 11639 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   918                           TMR3L equ 0FB2h ;# 
+   919  0000                     # 11659 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   920                           TMR3H equ 0FB3h ;# 
+   921  0000                     # 11679 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   922                           T3GCON equ 0FB4h ;# 
+   923  0000                     # 11774 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   924                           ECCP1AS equ 0FB6h ;# 
+   925  0000                     # 11779 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   926                           ECCPAS equ 0FB6h ;# 
+   927  0000                     # 12156 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   928                           PWM1CON equ 0FB7h ;# 
+   929  0000                     # 12161 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   930                           PWMCON equ 0FB7h ;# 
+   931  0000                     # 12410 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   932                           BAUDCON1 equ 0FB8h ;# 
+   933  0000                     # 12415 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   934                           BAUDCON equ 0FB8h ;# 
+   935  0000                     # 12419 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   936                           BAUDCTL equ 0FB8h ;# 
+   937  0000                     # 12423 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   938                           BAUD1CON equ 0FB8h ;# 
+   939  0000                     # 13084 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   940                           PSTR1CON equ 0FB9h ;# 
+   941  0000                     # 13089 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   942                           PSTRCON equ 0FB9h ;# 
+   943  0000                     # 13234 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   944                           T2CON equ 0FBAh ;# 
+   945  0000                     # 13305 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   946                           PR2 equ 0FBBh ;# 
+   947  0000                     # 13325 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   948                           TMR2 equ 0FBCh ;# 
+   949  0000                     # 13345 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   950                           CCP1CON equ 0FBDh ;# 
+   951  0000                     # 13427 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   952                           CCPR1 equ 0FBEh ;# 
+   953  0000                     # 13434 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   954                           CCPR1L equ 0FBEh ;# 
+   955  0000                     # 13454 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   956                           CCPR1H equ 0FBFh ;# 
+   957  0000                     # 13474 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   958                           ADCON2 equ 0FC0h ;# 
+   959  0000                     # 13545 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   960                           ADCON1 equ 0FC1h ;# 
+   961  0000                     # 13613 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   962                           ADCON0 equ 0FC2h ;# 
+   963  0000                     # 13738 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   964                           ADRES equ 0FC3h ;# 
+   965  0000                     # 13745 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   966                           ADRESL equ 0FC3h ;# 
+   967  0000                     # 13765 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   968                           ADRESH equ 0FC4h ;# 
+   969  0000                     # 13785 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   970                           SSP1CON2 equ 0FC5h ;# 
+   971  0000                     # 13790 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   972                           SSPCON2 equ 0FC5h ;# 
+   973  0000                     # 14139 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   974                           SSP1CON1 equ 0FC6h ;# 
+   975  0000                     # 14144 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   976                           SSPCON1 equ 0FC6h ;# 
+   977  0000                     # 14377 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   978                           SSP1STAT equ 0FC7h ;# 
+   979  0000                     # 14382 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   980                           SSPSTAT equ 0FC7h ;# 
+   981  0000                     # 15007 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   982                           SSP1ADD equ 0FC8h ;# 
+   983  0000                     # 15012 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   984                           SSPADD equ 0FC8h ;# 
+   985  0000                     # 15261 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   986                           SSP1BUF equ 0FC9h ;# 
+   987  0000                     # 15266 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   988                           SSPBUF equ 0FC9h ;# 
+   989  0000                     # 15315 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   990                           SSP1MSK equ 0FCAh ;# 
+   991  0000                     # 15320 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   992                           SSPMSK equ 0FCAh ;# 
+   993  0000                     # 15453 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   994                           SSP1CON3 equ 0FCBh ;# 
+   995  0000                     # 15458 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   996                           SSPCON3 equ 0FCBh ;# 
+   997  0000                     # 15575 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+   998                           T1GCON equ 0FCCh ;# 
+   999  0000                     # 15670 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1000                           T1CON equ 0FCDh ;# 
+  1001  0000                     # 15783 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1002                           TMR1 equ 0FCEh ;# 
+  1003  0000                     # 15790 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1004                           TMR1L equ 0FCEh ;# 
+  1005  0000                     # 15810 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1006                           TMR1H equ 0FCFh ;# 
+  1007  0000                     # 15830 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1008                           RCON equ 0FD0h ;# 
+  1009  0000                     # 15963 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1010                           WDTCON equ 0FD1h ;# 
+  1011  0000                     # 15991 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1012                           OSCCON2 equ 0FD2h ;# 
+  1013  0000                     # 16048 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1014                           OSCCON equ 0FD3h ;# 
+  1015  0000                     # 16131 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1016                           T0CON equ 0FD5h ;# 
+  1017  0000                     # 16201 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1018                           TMR0 equ 0FD6h ;# 
+  1019  0000                     # 16208 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1020                           TMR0L equ 0FD6h ;# 
+  1021  0000                     # 16228 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1022                           TMR0H equ 0FD7h ;# 
+  1023  0000                     # 16248 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1024                           STATUS equ 0FD8h ;# 
+  1025  0000                     # 16319 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1026                           FSR2 equ 0FD9h ;# 
+  1027  0000                     # 16326 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1028                           FSR2L equ 0FD9h ;# 
+  1029  0000                     # 16346 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1030                           FSR2H equ 0FDAh ;# 
+  1031  0000                     # 16353 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1032                           PLUSW2 equ 0FDBh ;# 
+  1033  0000                     # 16373 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1034                           PREINC2 equ 0FDCh ;# 
+  1035  0000                     # 16393 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1036                           POSTDEC2 equ 0FDDh ;# 
+  1037  0000                     # 16413 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1038                           POSTINC2 equ 0FDEh ;# 
+  1039  0000                     # 16433 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1040                           INDF2 equ 0FDFh ;# 
+  1041  0000                     # 16453 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1042                           BSR equ 0FE0h ;# 
+  1043  0000                     # 16460 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1044                           FSR1 equ 0FE1h ;# 
+  1045  0000                     # 16467 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1046                           FSR1L equ 0FE1h ;# 
+  1047  0000                     # 16487 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1048                           FSR1H equ 0FE2h ;# 
+  1049  0000                     # 16494 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1050                           PLUSW1 equ 0FE3h ;# 
+  1051  0000                     # 16514 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1052                           PREINC1 equ 0FE4h ;# 
+  1053  0000                     # 16534 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1054                           POSTDEC1 equ 0FE5h ;# 
+  1055  0000                     # 16554 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1056                           POSTINC1 equ 0FE6h ;# 
+  1057  0000                     # 16574 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1058                           INDF1 equ 0FE7h ;# 
+  1059  0000                     # 16594 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1060                           WREG equ 0FE8h ;# 
+  1061  0000                     # 16632 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1062                           FSR0 equ 0FE9h ;# 
+  1063  0000                     # 16639 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1064                           FSR0L equ 0FE9h ;# 
+  1065  0000                     # 16659 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1066                           FSR0H equ 0FEAh ;# 
+  1067  0000                     # 16666 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1068                           PLUSW0 equ 0FEBh ;# 
+  1069  0000                     # 16686 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1070                           PREINC0 equ 0FECh ;# 
+  1071  0000                     # 16706 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1072                           POSTDEC0 equ 0FEDh ;# 
+  1073  0000                     # 16726 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1074                           POSTINC0 equ 0FEEh ;# 
+  1075  0000                     # 16746 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1076                           INDF0 equ 0FEFh ;# 
+  1077  0000                     # 16766 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1078                           INTCON3 equ 0FF0h ;# 
+  1079  0000                     # 16858 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1080                           INTCON2 equ 0FF1h ;# 
+  1081  0000                     # 16928 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1082                           INTCON equ 0FF2h ;# 
+  1083  0000                     # 17045 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1084                           PROD equ 0FF3h ;# 
+  1085  0000                     # 17052 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1086                           PRODL equ 0FF3h ;# 
+  1087  0000                     # 17072 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1088                           PRODH equ 0FF4h ;# 
+  1089  0000                     # 17092 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1090                           TABLAT equ 0FF5h ;# 
+  1091  0000                     # 17114 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1092                           TBLPTR equ 0FF6h ;# 
+  1093  0000                     # 17121 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1094                           TBLPTRL equ 0FF6h ;# 
+  1095  0000                     # 17141 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1096                           TBLPTRH equ 0FF7h ;# 
+  1097  0000                     # 17161 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1098                           TBLPTRU equ 0FF8h ;# 
+  1099  0000                     # 17192 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1100                           PCLAT equ 0FF9h ;# 
+  1101  0000                     # 17199 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1102                           PC equ 0FF9h ;# 
+  1103  0000                     # 17206 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1104                           PCL equ 0FF9h ;# 
+  1105  0000                     # 17226 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1106                           PCLATH equ 0FFAh ;# 
+  1107  0000                     # 17246 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1108                           PCLATU equ 0FFBh ;# 
+  1109  0000                     # 17253 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1110                           STKPTR equ 0FFCh ;# 
+  1111  0000                     # 17359 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1112                           TOS equ 0FFDh ;# 
+  1113  0000                     # 17366 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1114                           TOSL equ 0FFDh ;# 
+  1115  0000                     # 17386 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1116                           TOSH equ 0FFEh ;# 
+  1117  0000                     # 17406 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1118                           TOSU equ 0FFFh ;# 
+  1119  0000                     # 54 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1120                           ANSELA equ 0F38h ;# 
+  1121  0000                     # 99 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1122                           ANSELB equ 0F39h ;# 
+  1123  0000                     # 149 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1124                           ANSELC equ 0F3Ah ;# 
+  1125  0000                     # 200 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1126                           ANSELD equ 0F3Bh ;# 
+  1127  0000                     # 262 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1128                           ANSELE equ 0F3Ch ;# 
+  1129  0000                     # 294 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1130                           PMD2 equ 0F3Dh ;# 
+  1131  0000                     # 332 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1132                           PMD1 equ 0F3Eh ;# 
+  1133  0000                     # 397 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1134                           PMD0 equ 0F3Fh ;# 
+  1135  0000                     # 474 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1136                           VREFCON2 equ 0F40h ;# 
+  1137  0000                     # 479 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1138                           DACCON1 equ 0F40h ;# 
+  1139  0000                     # 576 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1140                           VREFCON1 equ 0F41h ;# 
+  1141  0000                     # 581 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1142                           DACCON0 equ 0F41h ;# 
+  1143  0000                     # 696 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1144                           VREFCON0 equ 0F42h ;# 
+  1145  0000                     # 701 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1146                           FVRCON equ 0F42h ;# 
+  1147  0000                     # 790 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1148                           CTMUICON equ 0F43h ;# 
+  1149  0000                     # 795 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1150                           CTMUICONH equ 0F43h ;# 
+  1151  0000                     # 940 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1152                           CTMUCONL equ 0F44h ;# 
+  1153  0000                     # 945 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1154                           CTMUCON1 equ 0F44h ;# 
+  1155  0000                     # 1094 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1156                           CTMUCONH equ 0F45h ;# 
+  1157  0000                     # 1099 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1158                           CTMUCON0 equ 0F45h ;# 
+  1159  0000                     # 1206 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1160                           SRCON1 equ 0F46h ;# 
+  1161  0000                     # 1268 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1162                           SRCON0 equ 0F47h ;# 
+  1163  0000                     # 1339 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1164                           CCPTMRS1 equ 0F48h ;# 
+  1165  0000                     # 1391 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1166                           CCPTMRS0 equ 0F49h ;# 
+  1167  0000                     # 1465 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1168                           T6CON equ 0F4Ah ;# 
+  1169  0000                     # 1536 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1170                           PR6 equ 0F4Bh ;# 
+  1171  0000                     # 1556 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1172                           TMR6 equ 0F4Ch ;# 
+  1173  0000                     # 1576 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1174                           T5GCON equ 0F4Dh ;# 
+  1175  0000                     # 1671 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1176                           T5CON equ 0F4Eh ;# 
+  1177  0000                     # 1780 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1178                           TMR5 equ 0F4Fh ;# 
+  1179  0000                     # 1787 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1180                           TMR5L equ 0F4Fh ;# 
+  1181  0000                     # 1807 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1182                           TMR5H equ 0F50h ;# 
+  1183  0000                     # 1827 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1184                           T4CON equ 0F51h ;# 
+  1185  0000                     # 1898 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1186                           PR4 equ 0F52h ;# 
+  1187  0000                     # 1918 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1188                           TMR4 equ 0F53h ;# 
+  1189  0000                     # 1938 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1190                           CCP5CON equ 0F54h ;# 
+  1191  0000                     # 2002 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1192                           CCPR5 equ 0F55h ;# 
+  1193  0000                     # 2009 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1194                           CCPR5L equ 0F55h ;# 
+  1195  0000                     # 2029 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1196                           CCPR5H equ 0F56h ;# 
+  1197  0000                     # 2049 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1198                           CCP4CON equ 0F57h ;# 
+  1199  0000                     # 2113 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1200                           CCPR4 equ 0F58h ;# 
+  1201  0000                     # 2120 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1202                           CCPR4L equ 0F58h ;# 
+  1203  0000                     # 2140 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1204                           CCPR4H equ 0F59h ;# 
+  1205  0000                     # 2160 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1206                           PSTR3CON equ 0F5Ah ;# 
+  1207  0000                     # 2236 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1208                           ECCP3AS equ 0F5Bh ;# 
+  1209  0000                     # 2241 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1210                           CCP3AS equ 0F5Bh ;# 
+  1211  0000                     # 2478 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1212                           PWM3CON equ 0F5Ch ;# 
+  1213  0000                     # 2548 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1214                           CCP3CON equ 0F5Dh ;# 
+  1215  0000                     # 2630 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1216                           CCPR3 equ 0F5Eh ;# 
+  1217  0000                     # 2637 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1218                           CCPR3L equ 0F5Eh ;# 
+  1219  0000                     # 2657 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1220                           CCPR3H equ 0F5Fh ;# 
+  1221  0000                     # 2677 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1222                           SLRCON equ 0F60h ;# 
+  1223  0000                     # 2721 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1224                           WPUB equ 0F61h ;# 
+  1225  0000                     # 2783 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1226                           IOCB equ 0F62h ;# 
+  1227  0000                     # 2822 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1228                           PSTR2CON equ 0F63h ;# 
+  1229  0000                     # 2962 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1230                           ECCP2AS equ 0F64h ;# 
+  1231  0000                     # 2967 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1232                           CCP2AS equ 0F64h ;# 
+  1233  0000                     # 3204 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1234                           PWM2CON equ 0F65h ;# 
+  1235  0000                     # 3274 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1236                           CCP2CON equ 0F66h ;# 
+  1237  0000                     # 3356 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1238                           CCPR2 equ 0F67h ;# 
+  1239  0000                     # 3363 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1240                           CCPR2L equ 0F67h ;# 
+  1241  0000                     # 3383 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1242                           CCPR2H equ 0F68h ;# 
+  1243  0000                     # 3403 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1244                           SSP2CON3 equ 0F69h ;# 
+  1245  0000                     # 3465 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1246                           SSP2MSK equ 0F6Ah ;# 
+  1247  0000                     # 3535 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1248                           SSP2CON2 equ 0F6Bh ;# 
+  1249  0000                     # 3680 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1250                           SSP2CON1 equ 0F6Ch ;# 
+  1251  0000                     # 3800 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1252                           SSP2STAT equ 0F6Dh ;# 
+  1253  0000                     # 4200 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1254                           SSP2ADD equ 0F6Eh ;# 
+  1255  0000                     # 4270 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1256                           SSP2BUF equ 0F6Fh ;# 
+  1257  0000                     # 4290 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1258                           BAUDCON2 equ 0F70h ;# 
+  1259  0000                     # 4295 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1260                           BAUD2CON equ 0F70h ;# 
+  1261  0000                     # 4552 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1262                           RCSTA2 equ 0F71h ;# 
+  1263  0000                     # 4557 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1264                           RC2STA equ 0F71h ;# 
+  1265  0000                     # 4840 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1266                           TXSTA2 equ 0F72h ;# 
+  1267  0000                     # 4845 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1268                           TX2STA equ 0F72h ;# 
+  1269  0000                     # 5092 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1270                           TXREG2 equ 0F73h ;# 
+  1271  0000                     # 5097 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1272                           TX2REG equ 0F73h ;# 
+  1273  0000                     # 5130 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1274                           RCREG2 equ 0F74h ;# 
+  1275  0000                     # 5135 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1276                           RC2REG equ 0F74h ;# 
+  1277  0000                     # 5168 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1278                           SPBRG2 equ 0F75h ;# 
+  1279  0000                     # 5173 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1280                           SP2BRG equ 0F75h ;# 
+  1281  0000                     # 5206 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1282                           SPBRGH2 equ 0F76h ;# 
+  1283  0000                     # 5211 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1284                           SP2BRGH equ 0F76h ;# 
+  1285  0000                     # 5244 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1286                           CM2CON1 equ 0F77h ;# 
+  1287  0000                     # 5249 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1288                           CM12CON equ 0F77h ;# 
+  1289  0000                     # 5366 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1290                           CM2CON0 equ 0F78h ;# 
+  1291  0000                     # 5371 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1292                           CM2CON equ 0F78h ;# 
+  1293  0000                     # 5646 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1294                           CM1CON0 equ 0F79h ;# 
+  1295  0000                     # 5651 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1296                           CM1CON equ 0F79h ;# 
+  1297  0000                     # 6068 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1298                           PIE4 equ 0F7Ah ;# 
+  1299  0000                     # 6100 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1300                           PIR4 equ 0F7Bh ;# 
+  1301  0000                     # 6132 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1302                           IPR4 equ 0F7Ch ;# 
+  1303  0000                     # 6172 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1304                           PIE5 equ 0F7Dh ;# 
+  1305  0000                     # 6204 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1306                           PIR5 equ 0F7Eh ;# 
+  1307  0000                     # 6236 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1308                           IPR5 equ 0F7Fh ;# 
+  1309  0000                     # 6282 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1310                           PORTA equ 0F80h ;# 
+  1311  0000                     # 6567 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1312                           PORTB equ 0F81h ;# 
+  1313  0000                     # 6837 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1314                           PORTC equ 0F82h ;# 
+  1315  0000                     # 7144 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1316                           PORTD equ 0F83h ;# 
+  1317  0000                     # 7387 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1318                           PORTE equ 0F84h ;# 
+  1319  0000                     # 7562 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1320                           LATA equ 0F89h ;# 
+  1321  0000                     # 7674 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1322                           LATB equ 0F8Ah ;# 
+  1323  0000                     # 7786 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1324                           LATC equ 0F8Bh ;# 
+  1325  0000                     # 7898 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1326                           LATD equ 0F8Ch ;# 
+  1327  0000                     # 8010 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1328                           LATE equ 0F8Dh ;# 
+  1329  0000                     # 8062 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1330                           TRISA equ 0F92h ;# 
+  1331  0000                     # 8067 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1332                           DDRA equ 0F92h ;# 
+  1333  0000                     # 8284 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1334                           TRISB equ 0F93h ;# 
+  1335  0000                     # 8289 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1336                           DDRB equ 0F93h ;# 
+  1337  0000                     # 8506 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1338                           TRISC equ 0F94h ;# 
+  1339  0000                     # 8511 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1340                           DDRC equ 0F94h ;# 
+  1341  0000                     # 8728 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1342                           TRISD equ 0F95h ;# 
+  1343  0000                     # 8733 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1344                           DDRD equ 0F95h ;# 
+  1345  0000                     # 8950 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1346                           TRISE equ 0F96h ;# 
+  1347  0000                     # 8955 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1348                           DDRE equ 0F96h ;# 
+  1349  0000                     # 9066 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1350                           OSCTUNE equ 0F9Bh ;# 
+  1351  0000                     # 9136 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1352                           HLVDCON equ 0F9Ch ;# 
+  1353  0000                     # 9141 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1354                           LVDCON equ 0F9Ch ;# 
+  1355  0000                     # 9416 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1356                           PIE1 equ 0F9Dh ;# 
+  1357  0000                     # 9493 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1358                           PIR1 equ 0F9Eh ;# 
+  1359  0000                     # 9570 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1360                           IPR1 equ 0F9Fh ;# 
+  1361  0000                     # 9647 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1362                           PIE2 equ 0FA0h ;# 
+  1363  0000                     # 9733 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1364                           PIR2 equ 0FA1h ;# 
+  1365  0000                     # 9819 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1366                           IPR2 equ 0FA2h ;# 
+  1367  0000                     # 9905 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1368                           PIE3 equ 0FA3h ;# 
+  1369  0000                     # 10015 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1370                           PIR3 equ 0FA4h ;# 
+  1371  0000                     # 10093 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1372                           IPR3 equ 0FA5h ;# 
+  1373  0000                     # 10171 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1374                           EECON1 equ 0FA6h ;# 
+  1375  0000                     # 10237 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1376                           EECON2 equ 0FA7h ;# 
+  1377  0000                     # 10257 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1378                           EEDATA equ 0FA8h ;# 
+  1379  0000                     # 10277 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1380                           EEADR equ 0FA9h ;# 
+  1381  0000                     # 10347 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1382                           EEADRH equ 0FAAh ;# 
+  1383  0000                     # 10381 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1384                           RCSTA1 equ 0FABh ;# 
+  1385  0000                     # 10386 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1386                           RCSTA equ 0FABh ;# 
+  1387  0000                     # 10390 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1388                           RC1STA equ 0FABh ;# 
+  1389  0000                     # 10837 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1390                           TXSTA1 equ 0FACh ;# 
+  1391  0000                     # 10842 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1392                           TXSTA equ 0FACh ;# 
+  1393  0000                     # 10846 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1394                           TX1STA equ 0FACh ;# 
+  1395  0000                     # 11212 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1396                           TXREG1 equ 0FADh ;# 
+  1397  0000                     # 11217 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1398                           TXREG equ 0FADh ;# 
+  1399  0000                     # 11221 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1400                           TX1REG equ 0FADh ;# 
+  1401  0000                     # 11290 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1402                           RCREG1 equ 0FAEh ;# 
+  1403  0000                     # 11295 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1404                           RCREG equ 0FAEh ;# 
+  1405  0000                     # 11299 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1406                           RC1REG equ 0FAEh ;# 
+  1407  0000                     # 11368 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1408                           SPBRG1 equ 0FAFh ;# 
+  1409  0000                     # 11373 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1410                           SPBRG equ 0FAFh ;# 
+  1411  0000                     # 11377 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1412                           SP1BRG equ 0FAFh ;# 
+  1413  0000                     # 11446 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1414                           SPBRGH1 equ 0FB0h ;# 
+  1415  0000                     # 11451 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1416                           SPBRGH equ 0FB0h ;# 
+  1417  0000                     # 11455 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1418                           SP1BRGH equ 0FB0h ;# 
+  1419  0000                     # 11524 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1420                           T3CON equ 0FB1h ;# 
+  1421  0000                     # 11632 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1422                           TMR3 equ 0FB2h ;# 
+  1423  0000                     # 11639 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1424                           TMR3L equ 0FB2h ;# 
+  1425  0000                     # 11659 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1426                           TMR3H equ 0FB3h ;# 
+  1427  0000                     # 11679 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1428                           T3GCON equ 0FB4h ;# 
+  1429  0000                     # 11774 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1430                           ECCP1AS equ 0FB6h ;# 
+  1431  0000                     # 11779 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1432                           ECCPAS equ 0FB6h ;# 
+  1433  0000                     # 12156 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1434                           PWM1CON equ 0FB7h ;# 
+  1435  0000                     # 12161 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1436                           PWMCON equ 0FB7h ;# 
+  1437  0000                     # 12410 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1438                           BAUDCON1 equ 0FB8h ;# 
+  1439  0000                     # 12415 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1440                           BAUDCON equ 0FB8h ;# 
+  1441  0000                     # 12419 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1442                           BAUDCTL equ 0FB8h ;# 
+  1443  0000                     # 12423 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1444                           BAUD1CON equ 0FB8h ;# 
+  1445  0000                     # 13084 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1446                           PSTR1CON equ 0FB9h ;# 
+  1447  0000                     # 13089 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1448                           PSTRCON equ 0FB9h ;# 
+  1449  0000                     # 13234 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1450                           T2CON equ 0FBAh ;# 
+  1451  0000                     # 13305 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1452                           PR2 equ 0FBBh ;# 
+  1453  0000                     # 13325 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1454                           TMR2 equ 0FBCh ;# 
+  1455  0000                     # 13345 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1456                           CCP1CON equ 0FBDh ;# 
+  1457  0000                     # 13427 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1458                           CCPR1 equ 0FBEh ;# 
+  1459  0000                     # 13434 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1460                           CCPR1L equ 0FBEh ;# 
+  1461  0000                     # 13454 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1462                           CCPR1H equ 0FBFh ;# 
+  1463  0000                     # 13474 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1464                           ADCON2 equ 0FC0h ;# 
+  1465  0000                     # 13545 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1466                           ADCON1 equ 0FC1h ;# 
+  1467  0000                     # 13613 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1468                           ADCON0 equ 0FC2h ;# 
+  1469  0000                     # 13738 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1470                           ADRES equ 0FC3h ;# 
+  1471  0000                     # 13745 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1472                           ADRESL equ 0FC3h ;# 
+  1473  0000                     # 13765 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1474                           ADRESH equ 0FC4h ;# 
+  1475  0000                     # 13785 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1476                           SSP1CON2 equ 0FC5h ;# 
+  1477  0000                     # 13790 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1478                           SSPCON2 equ 0FC5h ;# 
+  1479  0000                     # 14139 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1480                           SSP1CON1 equ 0FC6h ;# 
+  1481  0000                     # 14144 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1482                           SSPCON1 equ 0FC6h ;# 
+  1483  0000                     # 14377 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1484                           SSP1STAT equ 0FC7h ;# 
+  1485  0000                     # 14382 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1486                           SSPSTAT equ 0FC7h ;# 
+  1487  0000                     # 15007 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1488                           SSP1ADD equ 0FC8h ;# 
+  1489  0000                     # 15012 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1490                           SSPADD equ 0FC8h ;# 
+  1491  0000                     # 15261 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1492                           SSP1BUF equ 0FC9h ;# 
+  1493  0000                     # 15266 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1494                           SSPBUF equ 0FC9h ;# 
+  1495  0000                     # 15315 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1496                           SSP1MSK equ 0FCAh ;# 
+  1497  0000                     # 15320 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1498                           SSPMSK equ 0FCAh ;# 
+  1499  0000                     # 15453 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1500                           SSP1CON3 equ 0FCBh ;# 
+  1501  0000                     # 15458 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1502                           SSPCON3 equ 0FCBh ;# 
+  1503  0000                     # 15575 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1504                           T1GCON equ 0FCCh ;# 
+  1505  0000                     # 15670 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1506                           T1CON equ 0FCDh ;# 
+  1507  0000                     # 15783 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1508                           TMR1 equ 0FCEh ;# 
+  1509  0000                     # 15790 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1510                           TMR1L equ 0FCEh ;# 
+  1511  0000                     # 15810 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1512                           TMR1H equ 0FCFh ;# 
+  1513  0000                     # 15830 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1514                           RCON equ 0FD0h ;# 
+  1515  0000                     # 15963 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1516                           WDTCON equ 0FD1h ;# 
+  1517  0000                     # 15991 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1518                           OSCCON2 equ 0FD2h ;# 
+  1519  0000                     # 16048 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1520                           OSCCON equ 0FD3h ;# 
+  1521  0000                     # 16131 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1522                           T0CON equ 0FD5h ;# 
+  1523  0000                     # 16201 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1524                           TMR0 equ 0FD6h ;# 
+  1525  0000                     # 16208 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1526                           TMR0L equ 0FD6h ;# 
+  1527  0000                     # 16228 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1528                           TMR0H equ 0FD7h ;# 
+  1529  0000                     # 16248 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1530                           STATUS equ 0FD8h ;# 
+  1531  0000                     # 16319 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1532                           FSR2 equ 0FD9h ;# 
+  1533  0000                     # 16326 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1534                           FSR2L equ 0FD9h ;# 
+  1535  0000                     # 16346 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1536                           FSR2H equ 0FDAh ;# 
+  1537  0000                     # 16353 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1538                           PLUSW2 equ 0FDBh ;# 
+  1539  0000                     # 16373 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1540                           PREINC2 equ 0FDCh ;# 
+  1541  0000                     # 16393 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1542                           POSTDEC2 equ 0FDDh ;# 
+  1543  0000                     # 16413 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1544                           POSTINC2 equ 0FDEh ;# 
+  1545  0000                     # 16433 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1546                           INDF2 equ 0FDFh ;# 
+  1547  0000                     # 16453 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1548                           BSR equ 0FE0h ;# 
+  1549  0000                     # 16460 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1550                           FSR1 equ 0FE1h ;# 
+  1551  0000                     # 16467 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1552                           FSR1L equ 0FE1h ;# 
+  1553  0000                     # 16487 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1554                           FSR1H equ 0FE2h ;# 
+  1555  0000                     # 16494 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1556                           PLUSW1 equ 0FE3h ;# 
+  1557  0000                     # 16514 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1558                           PREINC1 equ 0FE4h ;# 
+  1559  0000                     # 16534 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1560                           POSTDEC1 equ 0FE5h ;# 
+  1561  0000                     # 16554 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1562                           POSTINC1 equ 0FE6h ;# 
+  1563  0000                     # 16574 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1564                           INDF1 equ 0FE7h ;# 
+  1565  0000                     # 16594 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1566                           WREG equ 0FE8h ;# 
+  1567  0000                     # 16632 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1568                           FSR0 equ 0FE9h ;# 
+  1569  0000                     # 16639 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1570                           FSR0L equ 0FE9h ;# 
+  1571  0000                     # 16659 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1572                           FSR0H equ 0FEAh ;# 
+  1573  0000                     # 16666 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1574                           PLUSW0 equ 0FEBh ;# 
+  1575  0000                     # 16686 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1576                           PREINC0 equ 0FECh ;# 
+  1577  0000                     # 16706 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1578                           POSTDEC0 equ 0FEDh ;# 
+  1579  0000                     # 16726 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1580                           POSTINC0 equ 0FEEh ;# 
+  1581  0000                     # 16746 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1582                           INDF0 equ 0FEFh ;# 
+  1583  0000                     # 16766 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1584                           INTCON3 equ 0FF0h ;# 
+  1585  0000                     # 16858 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1586                           INTCON2 equ 0FF1h ;# 
+  1587  0000                     # 16928 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1588                           INTCON equ 0FF2h ;# 
+  1589  0000                     # 17045 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1590                           PROD equ 0FF3h ;# 
+  1591  0000                     # 17052 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1592                           PRODL equ 0FF3h ;# 
+  1593  0000                     # 17072 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1594                           PRODH equ 0FF4h ;# 
+  1595  0000                     # 17092 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1596                           TABLAT equ 0FF5h ;# 
+  1597  0000                     # 17114 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1598                           TBLPTR equ 0FF6h ;# 
+  1599  0000                     # 17121 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1600                           TBLPTRL equ 0FF6h ;# 
+  1601  0000                     # 17141 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1602                           TBLPTRH equ 0FF7h ;# 
+  1603  0000                     # 17161 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1604                           TBLPTRU equ 0FF8h ;# 
+  1605  0000                     # 17192 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1606                           PCLAT equ 0FF9h ;# 
+  1607  0000                     # 17199 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1608                           PC equ 0FF9h ;# 
+  1609  0000                     # 17206 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1610                           PCL equ 0FF9h ;# 
+  1611  0000                     # 17226 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1612                           PCLATH equ 0FFAh ;# 
+  1613  0000                     # 17246 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1614                           PCLATU equ 0FFBh ;# 
+  1615  0000                     # 17253 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1616                           STKPTR equ 0FFCh ;# 
+  1617  0000                     # 17359 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1618                           TOS equ 0FFDh ;# 
+  1619  0000                     # 17366 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1620                           TOSL equ 0FFDh ;# 
+  1621  0000                     # 17386 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1622                           TOSH equ 0FFEh ;# 
+  1623  0000                     # 17406 "/Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h"
+  1624                           TOSU equ 0FFFh ;# 
+  1625  0000                     	FNCALL	_main,_SYSTEM_Initialize
+  1626                           	FNCALL	_SYSTEM_Initialize,_OSCILLATOR_Initialize
+  1627                           	FNCALL	_SYSTEM_Initialize,_PIN_MANAGER_Initialize
+  1628                           	FNROOT	_main
+  1629                           	global	_ANSELA
+  1630                           _ANSELA	set	0xF38
+  1631  0000                     	global	_ANSELE
+  1632                           _ANSELE	set	0xF3C
+  1633  0000                     	global	_ANSELB
+  1634                           _ANSELB	set	0xF39
+  1635  0000                     	global	_ANSELC
+  1636                           _ANSELC	set	0xF3A
+  1637  0000                     	global	_ANSELD
+  1638                           _ANSELD	set	0xF3B
+  1639  0000                     	global	_LATCbits
+  1640                           _LATCbits	set	0xF8B
+  1641  0000                     	global	_PORTBbits
+  1642                           _PORTBbits	set	0xF81
+  1643  0000                     	global	_OSCTUNE
+  1644                           _OSCTUNE	set	0xF9B
+  1645  0000                     	global	_OSCCON2
+  1646                           _OSCCON2	set	0xFD2
+  1647  0000                     	global	_OSCCON
+  1648                           _OSCCON	set	0xFD3
+  1649  0000                     	global	_INTCONbits
+  1650                           _INTCONbits	set	0xFF2
+  1651  0000                     	global	_INTCON2bits
+  1652                           _INTCON2bits	set	0xFF1
+  1653  0000                     	global	_WPUB
+  1654                           _WPUB	set	0xF61
+  1655  0000                     	global	_TRISD
+  1656                           _TRISD	set	0xF95
+  1657  0000                     	global	_TRISC
+  1658                           _TRISC	set	0xF94
+  1659  0000                     	global	_TRISB
+  1660                           _TRISB	set	0xF93
+  1661  0000                     	global	_TRISA
+  1662                           _TRISA	set	0xF92
+  1663  0000                     	global	_TRISE
+  1664                           _TRISE	set	0xF96
+  1665  0000                     	global	_LATC
+  1666                           _LATC	set	0xF8B
+  1667  0000                     	global	_LATB
+  1668                           _LATB	set	0xF8A
+  1669  0000                     	global	_LATA
+  1670                           _LATA	set	0xF89
+  1671  0000                     	global	_LATD
+  1672                           _LATD	set	0xF8C
+  1673  0000                     	global	_LATE
+  1674                           _LATE	set	0xF8D
+  1675  0000                     ; #config settings
+  1676                           global __CFG_FOSC$INTIO67
+  1677                           __CFG_FOSC$INTIO67 equ 0x0
+  1678  0000                     global __CFG_PLLCFG$OFF
+  1679                           __CFG_PLLCFG$OFF equ 0x0
+  1680  0000                     global __CFG_PRICLKEN$ON
+  1681                           __CFG_PRICLKEN$ON equ 0x0
+  1682  0000                     global __CFG_FCMEN$OFF
+  1683                           __CFG_FCMEN$OFF equ 0x0
+  1684  0000                     global __CFG_IESO$OFF
+  1685                           __CFG_IESO$OFF equ 0x0
+  1686  0000                     global __CFG_PWRTEN$OFF
+  1687                           __CFG_PWRTEN$OFF equ 0x0
+  1688  0000                     global __CFG_BOREN$SBORDIS
+  1689                           __CFG_BOREN$SBORDIS equ 0x0
+  1690  0000                     global __CFG_BORV$190
+  1691                           __CFG_BORV$190 equ 0x0
+  1692  0000                     global __CFG_WDTEN$OFF
+  1693                           __CFG_WDTEN$OFF equ 0x0
+  1694  0000                     global __CFG_WDTPS$32768
+  1695                           __CFG_WDTPS$32768 equ 0x0
+  1696  0000                     global __CFG_CCP2MX$PORTC1
+  1697                           __CFG_CCP2MX$PORTC1 equ 0x0
+  1698  0000                     global __CFG_PBADEN$ON
+  1699                           __CFG_PBADEN$ON equ 0x0
+  1700  0000                     global __CFG_CCP3MX$PORTB5
+  1701                           __CFG_CCP3MX$PORTB5 equ 0x0
+  1702  0000                     global __CFG_HFOFST$ON
+  1703                           __CFG_HFOFST$ON equ 0x0
+  1704  0000                     global __CFG_T3CMX$PORTC0
+  1705                           __CFG_T3CMX$PORTC0 equ 0x0
+  1706  0000                     global __CFG_P2BMX$PORTD2
+  1707                           __CFG_P2BMX$PORTD2 equ 0x0
+  1708  0000                     global __CFG_MCLRE$EXTMCLR
+  1709                           __CFG_MCLRE$EXTMCLR equ 0x0
+  1710  0000                     global __CFG_STVREN$ON
+  1711                           __CFG_STVREN$ON equ 0x0
+  1712  0000                     global __CFG_LVP$ON
+  1713                           __CFG_LVP$ON equ 0x0
+  1714  0000                     global __CFG_XINST$OFF
+  1715                           __CFG_XINST$OFF equ 0x0
+  1716  0000                     global __CFG_DEBUG$OFF
+  1717                           __CFG_DEBUG$OFF equ 0x0
+  1718  0000                     global __CFG_CP0$OFF
+  1719                           __CFG_CP0$OFF equ 0x0
+  1720  0000                     global __CFG_CP1$OFF
+  1721                           __CFG_CP1$OFF equ 0x0
+  1722  0000                     global __CFG_CP2$OFF
+  1723                           __CFG_CP2$OFF equ 0x0
+  1724  0000                     global __CFG_CP3$OFF
+  1725                           __CFG_CP3$OFF equ 0x0
+  1726  0000                     global __CFG_CPB$OFF
+  1727                           __CFG_CPB$OFF equ 0x0
+  1728  0000                     global __CFG_CPD$OFF
+  1729                           __CFG_CPD$OFF equ 0x0
+  1730  0000                     global __CFG_WRT0$OFF
+  1731                           __CFG_WRT0$OFF equ 0x0
+  1732  0000                     global __CFG_WRT1$OFF
+  1733                           __CFG_WRT1$OFF equ 0x0
+  1734  0000                     global __CFG_WRT2$OFF
+  1735                           __CFG_WRT2$OFF equ 0x0
+  1736  0000                     global __CFG_WRT3$OFF
+  1737                           __CFG_WRT3$OFF equ 0x0
+  1738  0000                     global __CFG_WRTC$OFF
+  1739                           __CFG_WRTC$OFF equ 0x0
+  1740  0000                     global __CFG_WRTB$OFF
+  1741                           __CFG_WRTB$OFF equ 0x0
+  1742  0000                     global __CFG_WRTD$OFF
+  1743                           __CFG_WRTD$OFF equ 0x0
+  1744  0000                     global __CFG_EBTR0$OFF
+  1745                           __CFG_EBTR0$OFF equ 0x0
+  1746  0000                     global __CFG_EBTR1$OFF
+  1747                           __CFG_EBTR1$OFF equ 0x0
+  1748  0000                     global __CFG_EBTR2$OFF
+  1749                           __CFG_EBTR2$OFF equ 0x0
+  1750  0000                     global __CFG_EBTR3$OFF
+  1751                           __CFG_EBTR3$OFF equ 0x0
+  1752  0000                     global __CFG_EBTRB$OFF
+  1753                           __CFG_EBTRB$OFF equ 0x0
+  1754  0000                     	file	"/tmp/xcqs68UVE"
+  1755                           	line	#
+  1756                           psect	cinit,class=CODE,delta=1,reloc=2
+  1757                           global __pcinit
+  1758                           __pcinit:
+  1759  00FF0E                     global start_initialization
+  1760                           start_initialization:
+  1761  00FF0E                     
+  1762                           global __initialization
+  1763                           __initialization:
+  1764  00FF0E                     psect cinit,class=CODE,delta=1
+  1765                           global end_of_initialization,__end_of__initialization
+  1766                           
+  1767                           ;End of C runtime variable initialization code
+  1768                           
+  1769                           end_of_initialization:
+  1770  00FF0E                     __end_of__initialization:
+  1771  00FF0E                     movlb 0
+  1772  00FF0E  0100               goto _main	;jump to C main() function
+  1773  00FF10  EFB6  F07F         psect	cstackCOMRAM,class=COMRAM,space=1,noexec
+  1774                           global __pcstackCOMRAM
+  1775                           __pcstackCOMRAM:
+  1776  000001                     ?_OSCILLATOR_Initialize:	; 1 bytes @ 0x0
+  1777  000001                     ??_OSCILLATOR_Initialize:	; 1 bytes @ 0x0
+  1778  000001                     ?_PIN_MANAGER_Initialize:	; 1 bytes @ 0x0
+  1779  000001                     ??_PIN_MANAGER_Initialize:	; 1 bytes @ 0x0
+  1780  000001                     ?_SYSTEM_Initialize:	; 1 bytes @ 0x0
+  1781  000001                     ??_SYSTEM_Initialize:	; 1 bytes @ 0x0
+  1782  000001                     ?_main:	; 1 bytes @ 0x0
+  1783  000001                     ??_main:	; 1 bytes @ 0x0
+  1784  000001                     	ds   1
+  1785  000001                     	global	main@a
+  1786                           main@a:	; 2 bytes @ 0x1
+  1787  000002                     	ds   2
+  1788  000002                     ;!
+  1789                           ;!Data Sizes:
+  1790                           ;!    Strings     0
+  1791                           ;!    Constant    0
+  1792                           ;!    Data        0
+  1793                           ;!    BSS         0
+  1794                           ;!    Persistent  0
+  1795                           ;!    Stack       0
+  1796                           ;!
+  1797                           ;!Auto Spaces:
+  1798                           ;!    Space          Size  Autos    Used
+  1799                           ;!    COMRAM           95      3       3
+  1800                           ;!    BANK0           160      0       0
+  1801                           ;!    BANK1           256      0       0
+  1802                           ;!    BANK2           256      0       0
+  1803                           ;!    BANK3           256      0       0
+  1804                           ;!    BANK4           256      0       0
+  1805                           ;!    BANK5           256      0       0
+  1806                           ;!    BANK6           256      0       0
+  1807                           ;!    BANK7           256      0       0
+  1808                           ;!    BANK8           256      0       0
+  1809                           ;!    BANK9           256      0       0
+  1810                           ;!    BANK10          256      0       0
+  1811                           ;!    BANK11          256      0       0
+  1812                           ;!    BANK12          256      0       0
+  1813                           ;!    BANK13          256      0       0
+  1814                           ;!    BANK14          256      0       0
+  1815                           ;!    BANK15           56      0       0
+  1816                           
+  1817                           ;!
+  1818                           ;!Pointer List with Targets:
+  1819                           ;!
+  1820                           ;!    None.
+  1821                           
+  1822                           
+  1823                           ;!
+  1824                           ;!Critical Paths under _main in COMRAM
+  1825                           ;!
+  1826                           ;!    None.
+  1827                           ;!
+  1828                           ;!Critical Paths under _main in BANK0
+  1829                           ;!
+  1830                           ;!    None.
+  1831                           ;!
+  1832                           ;!Critical Paths under _main in BANK1
+  1833                           ;!
+  1834                           ;!    None.
+  1835                           ;!
+  1836                           ;!Critical Paths under _main in BANK2
+  1837                           ;!
+  1838                           ;!    None.
+  1839                           ;!
+  1840                           ;!Critical Paths under _main in BANK3
+  1841                           ;!
+  1842                           ;!    None.
+  1843                           ;!
+  1844                           ;!Critical Paths under _main in BANK4
+  1845                           ;!
+  1846                           ;!    None.
+  1847                           ;!
+  1848                           ;!Critical Paths under _main in BANK5
+  1849                           ;!
+  1850                           ;!    None.
+  1851                           ;!
+  1852                           ;!Critical Paths under _main in BANK6
+  1853                           ;!
+  1854                           ;!    None.
+  1855                           ;!
+  1856                           ;!Critical Paths under _main in BANK7
+  1857                           ;!
+  1858                           ;!    None.
+  1859                           ;!
+  1860                           ;!Critical Paths under _main in BANK8
+  1861                           ;!
+  1862                           ;!    None.
+  1863                           ;!
+  1864                           ;!Critical Paths under _main in BANK9
+  1865                           ;!
+  1866                           ;!    None.
+  1867                           ;!
+  1868                           ;!Critical Paths under _main in BANK10
+  1869                           ;!
+  1870                           ;!    None.
+  1871                           ;!
+  1872                           ;!Critical Paths under _main in BANK11
+  1873                           ;!
+  1874                           ;!    None.
+  1875                           ;!
+  1876                           ;!Critical Paths under _main in BANK12
+  1877                           ;!
+  1878                           ;!    None.
+  1879                           ;!
+  1880                           ;!Critical Paths under _main in BANK13
+  1881                           ;!
+  1882                           ;!    None.
+  1883                           ;!
+  1884                           ;!Critical Paths under _main in BANK14
+  1885                           ;!
+  1886                           ;!    None.
+  1887                           ;!
+  1888                           ;!Critical Paths under _main in BANK15
+  1889                           ;!
+  1890                           ;!    None.
+  1891                           
+  1892 ;;
+  1893 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+  1894 ;;
+  1895                           
+  1896                           ;!
+  1897                           ;!Call Graph Tables:
+  1898                           ;!
+  1899                           ;! ---------------------------------------------------------------------------------
+  1900                           ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+  1901                           ;! ---------------------------------------------------------------------------------
+  1902                           ;! (0) _main                                                 3     3      0      15
+  1903                           ;!                                              0 COMRAM     3     3      0
+  1904                           ;!                  _SYSTEM_Initialize
+  1905                           ;! ---------------------------------------------------------------------------------
+  1906                           ;! (1) _SYSTEM_Initialize                                    0     0      0       0
+  1907                           ;!              _OSCILLATOR_Initialize
+  1908                           ;!             _PIN_MANAGER_Initialize
+  1909                           ;! ---------------------------------------------------------------------------------
+  1910                           ;! (2) _PIN_MANAGER_Initialize                               0     0      0       0
+  1911                           ;! ---------------------------------------------------------------------------------
+  1912                           ;! (2) _OSCILLATOR_Initialize                                0     0      0       0
+  1913                           ;! ---------------------------------------------------------------------------------
+  1914                           ;! Estimated maximum stack depth 2
+  1915                           ;! ---------------------------------------------------------------------------------
+  1916                           ;!
+  1917                           ;! Call Graph Graphs:
+  1918                           ;!
+  1919                           ;! _main (ROOT)
+  1920                           ;!   _SYSTEM_Initialize
+  1921                           ;!     _OSCILLATOR_Initialize
+  1922                           ;!     _PIN_MANAGER_Initialize
+  1923                           ;!
+  1924                           
+  1925                           ;! Address spaces:
+  1926                           
+  1927                           ;!Name               Size   Autos  Total    Cost      Usage
+  1928                           ;!BITCOMRAM           5F      0       0       0        0.0%
+  1929                           ;!EEDATA             400      0       0       0        0.0%
+  1930                           ;!NULL                 0      0       0       0        0.0%
+  1931                           ;!CODE                 0      0       0       0        0.0%
+  1932                           ;!COMRAM              5F      3       3       1        3.2%
+  1933                           ;!STACK                0      0       0       2        0.0%
+  1934                           ;!DATA                 0      0       0       3        0.0%
+  1935                           ;!BITBANK0            A0      0       0       4        0.0%
+  1936                           ;!BANK0               A0      0       0       5        0.0%
+  1937                           ;!BITBANK1           100      0       0       6        0.0%
+  1938                           ;!BANK1              100      0       0       7        0.0%
+  1939                           ;!BITBANK2           100      0       0       8        0.0%
+  1940                           ;!BANK2              100      0       0       9        0.0%
+  1941                           ;!BITBANK3           100      0       0      10        0.0%
+  1942                           ;!BANK3              100      0       0      11        0.0%
+  1943                           ;!ABS                  0      0       0      12        0.0%
+  1944                           ;!BITBANK4           100      0       0      13        0.0%
+  1945                           ;!BANK4              100      0       0      14        0.0%
+  1946                           ;!BITBANK5           100      0       0      15        0.0%
+  1947                           ;!BANK5              100      0       0      16        0.0%
+  1948                           ;!BITBANK6           100      0       0      17        0.0%
+  1949                           ;!BANK6              100      0       0      18        0.0%
+  1950                           ;!BITBANK7           100      0       0      19        0.0%
+  1951                           ;!BANK7              100      0       0      20        0.0%
+  1952                           ;!BITBANK8           100      0       0      21        0.0%
+  1953                           ;!BANK8              100      0       0      22        0.0%
+  1954                           ;!BITBANK9           100      0       0      23        0.0%
+  1955                           ;!BANK9              100      0       0      24        0.0%
+  1956                           ;!BITBANK10          100      0       0      25        0.0%
+  1957                           ;!BANK10             100      0       0      26        0.0%
+  1958                           ;!BITBANK11          100      0       0      27        0.0%
+  1959                           ;!BANK11             100      0       0      28        0.0%
+  1960                           ;!BITBANK12          100      0       0      29        0.0%
+  1961                           ;!BANK12             100      0       0      30        0.0%
+  1962                           ;!BITBANK13          100      0       0      31        0.0%
+  1963                           ;!BANK13             100      0       0      32        0.0%
+  1964                           ;!BITBANK14          100      0       0      33        0.0%
+  1965                           ;!BANK14             100      0       0      34        0.0%
+  1966                           ;!BITBANK15           38      0       0      35        0.0%
+  1967                           ;!BANK15              38      0       0      36        0.0%
+  1968                           ;!BIGRAM             F37      0       0      37        0.0%
+  1969                           ;!BITSFR_1             0      0       0     200        0.0%
+  1970                           ;!SFR_1                0      0       0     200        0.0%
+  1971                           ;!BITSFR               0      0       0     200        0.0%
+  1972                           ;!SFR                  0      0       0     200        0.0%
+  1973                           
+  1974                           	global	_main
+  1975                           
+  1976 ;; *************** function _main *****************
+  1977 ;; Defined at:
+  1978 ;;		line 49 in file "main.c"
+  1979 ;; Parameters:    Size  Location     Type
+  1980 ;;		None
+  1981 ;; Auto vars:     Size  Location     Type
+  1982 ;;  a               2    1[COMRAM] int 
+  1983 ;; Return value:  Size  Location     Type
+  1984 ;;                  1    wreg      void 
+  1985 ;; Registers used:
+  1986 ;;		wreg, status,2, status,0, cstack
+  1987 ;; Tracked objects:
+  1988 ;;		On entry : 0/0
+  1989 ;;		On exit  : 0/0
+  1990 ;;		Unchanged: 0/0
+  1991 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12  BANK13  BANK14  BANK15
+  1992 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  1993 ;;      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  1994 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  1995 ;;      Totals:         3       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  1996 ;;Total ram usage:        3 bytes
+  1997 ;; Hardware stack levels required when called:    2
+  1998 ;; This function calls:
+  1999 ;;		_SYSTEM_Initialize
+  2000 ;; This function is called by:
+  2001 ;;		Startup code after reset
+  2002 ;; This function uses a non-reentrant model
+  2003 ;;
+  2004                           psect	text0,class=CODE,space=0,reloc=2,group=0
+  2005                           	file	"main.c"
+  2006                           	line	49
+  2007                           global __ptext0
+  2008                           __ptext0:
+  2009  00FF6C                     psect	text0
+  2010                           	file	"main.c"
+  2011                           	line	49
+  2012                           	global	__size_of_main
+  2013                           	__size_of_main	equ	__end_of_main-_main
+  2014  0000                     	
+  2015                           _main:
+  2016  00FF6C                     ;incstack = 0
+  2017                           	opt	stack 29
+  2018                           	line	52
+  2019                           	
+  2020                           l772:
+  2021  00FF6C                     ;main.c: 52:     SYSTEM_Initialize();
+  2022                           	call	_SYSTEM_Initialize	;wreg free
+  2023  00FF6C  EC8A  F07F         	goto	l774
+  2024  00FF70  EFBA  F07F         	line	70
+  2025                           ;main.c: 70:     while (1)
+  2026                           	
+  2027                           l73:
+  2028  00FF74                     	line	72
+  2029                           	
+  2030                           l774:
+  2031  00FF74                     ;main.c: 71:     {;main.c: 72:         LATC= 0x0F;
+  2032                           	movlw	low(0Fh)
+  2033  00FF74  0E0F               	movwf	((c:3979)),c	;volatile
+  2034  00FF76  6E8B               	line	73
+  2035                           	
+  2036                           l776:
+  2037  00FF78                     ;main.c: 73:         int a = PORTBbits.RB4;
+  2038                           	btfsc	((c:3969)),c,4	;volatile
+  2039  00FF78  B881               	goto	u11
+  2040  00FF7A  EFC1  F07F         	goto	u10
+  2041  00FF7E  EFC5  F07F         u11:
+  2042  00FF82                     	clrf	(??_main+0+0)&0ffh,c
+  2043  00FF82  6A01               	incf	(??_main+0+0)&0ffh,c
+  2044  00FF84  2A01               	goto	u18
+  2045  00FF86  EFC6  F07F         u10:
+  2046  00FF8A                     	clrf	(??_main+0+0)&0ffh,c
+  2047  00FF8A  6A01               u18:
+  2048  00FF8C                     	movf	(??_main+0+0),c,w
+  2049  00FF8C  5001               	movwf	((c:main@a)),c
+  2050  00FF8E  6E02               	clrf	((c:main@a+1)),c
+  2051  00FF90  6A03               	line	74
+  2052                           ;main.c: 74:         while(a == 0)
+  2053                           	goto	l788
+  2054  00FF92  EFEF  F07F         	
+  2055                           l75:
+  2056  00FF96                     	line	76
+  2057                           	
+  2058                           l778:
+  2059  00FF96                     ;main.c: 75:         {;main.c: 76:             a = PORTBbits.RB4;
+  2060                           	btfsc	((c:3969)),c,4	;volatile
+  2061  00FF96  B881               	goto	u21
+  2062  00FF98  EFD0  F07F         	goto	u20
+  2063  00FF9C  EFD4  F07F         u21:
+  2064  00FFA0                     	clrf	(??_main+0+0)&0ffh,c
+  2065  00FFA0  6A01               	incf	(??_main+0+0)&0ffh,c
+  2066  00FFA2  2A01               	goto	u28
+  2067  00FFA4  EFD5  F07F         u20:
+  2068  00FFA8                     	clrf	(??_main+0+0)&0ffh,c
+  2069  00FFA8  6A01               u28:
+  2070  00FFAA                     	movf	(??_main+0+0),c,w
+  2071  00FFAA  5001               	movwf	((c:main@a)),c
+  2072  00FFAC  6E02               	clrf	((c:main@a+1)),c
+  2073  00FFAE  6A03               	line	77
+  2074                           	
+  2075                           l780:
+  2076  00FFB0                     ;main.c: 77:             if(LATCbits.LATC7 == 1)
+  2077                           	btfss	((c:3979)),c,7	;volatile
+  2078  00FFB0  AE8B               	goto	u31
+  2079  00FFB2  EFDD  F07F         	goto	u30
+  2080  00FFB6  EFDF  F07F         u31:
+  2081  00FFBA                     	goto	l784
+  2082  00FFBA  EFE2  F07F         u30:
+  2083  00FFBE                     	line	79
+  2084                           	
+  2085                           l782:
+  2086  00FFBE                     ;main.c: 78:             {;main.c: 79:                 LATCbits.LATC0 =1;
+  2087                           	bsf	((c:3979)),c,0	;volatile
+  2088  00FFBE  808B               	goto	l784
+  2089  00FFC0  EFE2  F07F         	line	80
+  2090                           ;main.c: 80:             }
+  2091                           	
+  2092                           l76:
+  2093  00FFC4                     	line	81
+  2094                           	
+  2095                           l784:
+  2096  00FFC4                     ;main.c: 81:             LATC = LATC << 1;
+  2097                           	movf	((c:3979)),c,w	;volatile
+  2098  00FFC4  508B               	addwf	((c:3979)),c,w	;volatile
+  2099  00FFC6  248B               	movwf	((c:3979)),c	;volatile
+  2100  00FFC8  6E8B               	line	82
+  2101                           	
+  2102                           l786:
+  2103  00FFCA                     ;main.c: 82:             _delay((unsigned long)((100)*(1000000/4000.0)));
+  2104                           	opt asmopt_push
+  2105                           opt asmopt_off
+  2106                           movlw	33
+  2107  00FFCA  0E21               movwf	(??_main+0+0)&0ffh,c,f
+  2108  00FFCC  6E01               	movlw	118
+  2109  00FFCE  0E76               u57:
+  2110  00FFD0                     decfsz	wreg,f
+  2111  00FFD0  2EE8               	bra	u57
+  2112  00FFD2  D7FE               	decfsz	(??_main+0+0)&0ffh,c,f
+  2113  00FFD4  2E01               	bra	u57
+  2114  00FFD6  D7FC               	nop2
+  2115  00FFD8  D000               opt asmopt_pop
+  2116                           
+  2117                           	goto	l788
+  2118  00FFDA  EFEF  F07F         	line	83
+  2119                           ;main.c: 83:         }
+  2120                           	
+  2121                           l74:
+  2122  00FFDE                     	line	74
+  2123                           	
+  2124                           l788:
+  2125  00FFDE                     ;main.c: 74:         while(a == 0)
+  2126                           	movf	((c:main@a)),c,w
+  2127  00FFDE  5002               iorwf	((c:main@a+1)),c,w
+  2128  00FFE0  1003               	btfsc	status,2
+  2129  00FFE2  B4D8               	goto	u41
+  2130  00FFE4  EFF6  F07F         	goto	u40
+  2131  00FFE8  EFF8  F07F         
+  2132                           u41:
+  2133  00FFEC                     	goto	l778
+  2134  00FFEC  EFCB  F07F         u40:
+  2135  00FFF0                     	goto	l774
+  2136  00FFF0  EFBA  F07F         	
+  2137                           l77:
+  2138  00FFF4                     	goto	l774
+  2139  00FFF4  EFBA  F07F         	line	85
+  2140                           ;main.c: 85:     }
+  2141                           	
+  2142                           l78:
+  2143  00FFF8                     	goto	l774
+  2144  00FFF8  EFBA  F07F         	
+  2145                           l79:
+  2146  00FFFC                     	line	86
+  2147                           	
+  2148                           l80:
+  2149  00FFFC                     	global	start
+  2150                           	goto	start
+  2151  00FFFC  EF00  F000         	opt stack 0
+  2152                           GLOBAL	__end_of_main
+  2153                           	__end_of_main:
+  2154  010000                     	signat	_main,89
+  2155                           	global	_SYSTEM_Initialize
+  2156                           
+  2157 ;; *************** function _SYSTEM_Initialize *****************
+  2158 ;; Defined at:
+  2159 ;;		line 50 in file "mcc_generated_files/mcc.c"
+  2160 ;; Parameters:    Size  Location     Type
+  2161 ;;		None
+  2162 ;; Auto vars:     Size  Location     Type
+  2163 ;;		None
+  2164 ;; Return value:  Size  Location     Type
+  2165 ;;                  1    wreg      void 
+  2166 ;; Registers used:
+  2167 ;;		wreg, status,2, cstack
+  2168 ;; Tracked objects:
+  2169 ;;		On entry : 0/0
+  2170 ;;		On exit  : 0/0
+  2171 ;;		Unchanged: 0/0
+  2172 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12  BANK13  BANK14  BANK15
+  2173 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2174 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2175 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2176 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2177 ;;Total ram usage:        0 bytes
+  2178 ;; Hardware stack levels used:    1
+  2179 ;; Hardware stack levels required when called:    1
+  2180 ;; This function calls:
+  2181 ;;		_OSCILLATOR_Initialize
+  2182 ;;		_PIN_MANAGER_Initialize
+  2183 ;; This function is called by:
+  2184 ;;		_main
+  2185 ;; This function uses a non-reentrant model
+  2186 ;;
+  2187                           psect	text1,class=CODE,space=0,reloc=2,group=0
+  2188                           	file	"mcc_generated_files/mcc.c"
+  2189                           	line	50
+  2190                           global __ptext1
+  2191                           __ptext1:
+  2192  00FF14                     psect	text1
+  2193                           	file	"mcc_generated_files/mcc.c"
+  2194                           	line	50
+  2195                           	global	__size_of_SYSTEM_Initialize
+  2196                           	__size_of_SYSTEM_Initialize	equ	__end_of_SYSTEM_Initialize-_SYSTEM_Initialize
+  2197  0000                     	
+  2198                           _SYSTEM_Initialize:
+  2199  00FF14                     ;incstack = 0
+  2200                           	opt	stack 29
+  2201                           	line	53
+  2202                           	
+  2203                           l768:
+  2204  00FF14                     ;mcc_generated_files/mcc.c: 53:     PIN_MANAGER_Initialize();
+  2205                           	call	_PIN_MANAGER_Initialize	;wreg free
+  2206  00FF14  EC96  F07F         	line	54
+  2207                           ;mcc_generated_files/mcc.c: 54:     OSCILLATOR_Initialize();
+  2208                           	call	_OSCILLATOR_Initialize	;wreg free
+  2209  00FF18  EC8F  F07F         	line	55
+  2210                           	
+  2211                           l55:
+  2212  00FF1C                     	return	;funcret
+  2213  00FF1C  0012               	opt stack 0
+  2214                           GLOBAL	__end_of_SYSTEM_Initialize
+  2215                           	__end_of_SYSTEM_Initialize:
+  2216  00FF1E                     	signat	_SYSTEM_Initialize,89
+  2217                           	global	_PIN_MANAGER_Initialize
+  2218                           
+  2219 ;; *************** function _PIN_MANAGER_Initialize *****************
+  2220 ;; Defined at:
+  2221 ;;		line 57 in file "mcc_generated_files/pin_manager.c"
+  2222 ;; Parameters:    Size  Location     Type
+  2223 ;;		None
+  2224 ;; Auto vars:     Size  Location     Type
+  2225 ;;		None
+  2226 ;; Return value:  Size  Location     Type
+  2227 ;;                  1    wreg      void 
+  2228 ;; Registers used:
+  2229 ;;		wreg, status,2
+  2230 ;; Tracked objects:
+  2231 ;;		On entry : 0/0
+  2232 ;;		On exit  : 0/0
+  2233 ;;		Unchanged: 0/0
+  2234 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12  BANK13  BANK14  BANK15
+  2235 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2236 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2237 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2238 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2239 ;;Total ram usage:        0 bytes
+  2240 ;; Hardware stack levels used:    1
+  2241 ;; This function calls:
+  2242 ;;		Nothing
+  2243 ;; This function is called by:
+  2244 ;;		_SYSTEM_Initialize
+  2245 ;; This function uses a non-reentrant model
+  2246 ;;
+  2247                           psect	text2,class=CODE,space=0,reloc=2,group=0
+  2248                           	file	"mcc_generated_files/pin_manager.c"
+  2249                           	line	57
+  2250                           global __ptext2
+  2251                           __ptext2:
+  2252  00FF2C                     psect	text2
+  2253                           	file	"mcc_generated_files/pin_manager.c"
+  2254                           	line	57
+  2255                           	global	__size_of_PIN_MANAGER_Initialize
+  2256                           	__size_of_PIN_MANAGER_Initialize	equ	__end_of_PIN_MANAGER_Initialize-_PIN_MANAGER_Initi
+                                 alize
+  2257  0000                     	
+  2258                           _PIN_MANAGER_Initialize:
+  2259  00FF2C                     ;incstack = 0
+  2260                           	opt	stack 29
+  2261                           	line	62
+  2262                           	
+  2263                           l756:
+  2264  00FF2C                     ;mcc_generated_files/pin_manager.c: 62:     LATE = 0x00;
+  2265                           	movlw	low(0)
+  2266  00FF2C  0E00               	movwf	((c:3981)),c	;volatile
+  2267  00FF2E  6E8D               	line	63
+  2268                           ;mcc_generated_files/pin_manager.c: 63:     LATD = 0x00;
+  2269                           	movlw	low(0)
+  2270  00FF30  0E00               	movwf	((c:3980)),c	;volatile
+  2271  00FF32  6E8C               	line	64
+  2272                           ;mcc_generated_files/pin_manager.c: 64:     LATA = 0x00;
+  2273                           	movlw	low(0)
+  2274  00FF34  0E00               	movwf	((c:3977)),c	;volatile
+  2275  00FF36  6E89               	line	65
+  2276                           ;mcc_generated_files/pin_manager.c: 65:     LATB = 0x00;
+  2277                           	movlw	low(0)
+  2278  00FF38  0E00               	movwf	((c:3978)),c	;volatile
+  2279  00FF3A  6E8A               	line	66
+  2280                           ;mcc_generated_files/pin_manager.c: 66:     LATC = 0x00;
+  2281                           	movlw	low(0)
+  2282  00FF3C  0E00               	movwf	((c:3979)),c	;volatile
+  2283  00FF3E  6E8B               	line	71
+  2284                           ;mcc_generated_files/pin_manager.c: 71:     TRISE = 0x07;
+  2285                           	movlw	low(07h)
+  2286  00FF40  0E07               	movwf	((c:3990)),c	;volatile
+  2287  00FF42  6E96               	line	72
+  2288                           ;mcc_generated_files/pin_manager.c: 72:     TRISA = 0x7F;
+  2289                           	movlw	low(07Fh)
+  2290  00FF44  0E7F               	movwf	((c:3986)),c	;volatile
+  2291  00FF46  6E92               	line	73
+  2292                           	
+  2293                           l758:
+  2294  00FF48                     ;mcc_generated_files/pin_manager.c: 73:     TRISB = 0xFF;
+  2295                           	setf	((c:3987)),c	;volatile
+  2296  00FF48  6893               	line	74
+  2297                           ;mcc_generated_files/pin_manager.c: 74:     TRISC = 0x00;
+  2298                           	movlw	low(0)
+  2299  00FF4A  0E00               	movwf	((c:3988)),c	;volatile
+  2300  00FF4C  6E94               	line	75
+  2301                           	
+  2302                           l760:
+  2303  00FF4E                     ;mcc_generated_files/pin_manager.c: 75:     TRISD = 0xFF;
+  2304                           	setf	((c:3989)),c	;volatile
+  2305  00FF4E  6895               	line	80
+  2306                           	
+  2307                           l762:
+  2308  00FF50                     ;mcc_generated_files/pin_manager.c: 80:     ANSELD = 0xFF;
+  2309                           	movlb	15	; () banked
+  2310  00FF50  010F               	setf	((3899))&0ffh	;volatile
+  2311  00FF52  693B               	line	81
+  2312                           ;mcc_generated_files/pin_manager.c: 81:     ANSELC = 0xFC;
+  2313                           	movlw	low(0FCh)
+  2314  00FF54  0EFC               	movwf	((3898))&0ffh	;volatile
+  2315  00FF56  6F3A               	line	82
+  2316                           ;mcc_generated_files/pin_manager.c: 82:     ANSELB = 0x2F;
+  2317                           	movlw	low(02Fh)
+  2318  00FF58  0E2F               	movwf	((3897))&0ffh	;volatile
+  2319  00FF5A  6F39               	line	83
+  2320                           ;mcc_generated_files/pin_manager.c: 83:     ANSELE = 0x07;
+  2321                           	movlw	low(07h)
+  2322  00FF5C  0E07               	movwf	((3900))&0ffh	;volatile
+  2323  00FF5E  6F3C               	line	84
+  2324                           ;mcc_generated_files/pin_manager.c: 84:     ANSELA = 0x2F;
+  2325                           	movlw	low(02Fh)
+  2326  00FF60  0E2F               	movwf	((3896))&0ffh	;volatile
+  2327  00FF62  6F38               	line	89
+  2328                           ;mcc_generated_files/pin_manager.c: 89:     WPUB = 0x00;
+  2329                           	movlw	low(0)
+  2330  00FF64  0E00               	movwf	((c:3937)),c	;volatile
+  2331  00FF66  6E61               	line	90
+  2332                           	
+  2333                           l764:; BSR set to: 15
+  2334  00FF68                     
+  2335                           ;mcc_generated_files/pin_manager.c: 90:     INTCON2bits.nRBPU = 1;
+  2336                           	bsf	((c:4081)),c,7	;volatile
+  2337  00FF68  8EF1               	line	100
+  2338                           	
+  2339                           l39:; BSR set to: 15
+  2340  00FF6A                     
+  2341                           	return	;funcret
+  2342  00FF6A  0012               	opt stack 0
+  2343                           GLOBAL	__end_of_PIN_MANAGER_Initialize
+  2344                           	__end_of_PIN_MANAGER_Initialize:
+  2345  00FF6C                     	signat	_PIN_MANAGER_Initialize,89
+  2346                           	global	_OSCILLATOR_Initialize
+  2347                           
+  2348 ;; *************** function _OSCILLATOR_Initialize *****************
+  2349 ;; Defined at:
+  2350 ;;		line 57 in file "mcc_generated_files/mcc.c"
+  2351 ;; Parameters:    Size  Location     Type
+  2352 ;;		None
+  2353 ;; Auto vars:     Size  Location     Type
+  2354 ;;		None
+  2355 ;; Return value:  Size  Location     Type
+  2356 ;;                  1    wreg      void 
+  2357 ;; Registers used:
+  2358 ;;		wreg, status,2
+  2359 ;; Tracked objects:
+  2360 ;;		On entry : 0/0
+  2361 ;;		On exit  : 0/0
+  2362 ;;		Unchanged: 0/0
+  2363 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12  BANK13  BANK14  BANK15
+  2364 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2365 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2366 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2367 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0
+  2368 ;;Total ram usage:        0 bytes
+  2369 ;; Hardware stack levels used:    1
+  2370 ;; This function calls:
+  2371 ;;		Nothing
+  2372 ;; This function is called by:
+  2373 ;;		_SYSTEM_Initialize
+  2374 ;; This function uses a non-reentrant model
+  2375 ;;
+  2376                           psect	text3,class=CODE,space=0,reloc=2,group=0
+  2377                           	file	"mcc_generated_files/mcc.c"
+  2378                           	line	57
+  2379                           global __ptext3
+  2380                           __ptext3:
+  2381  00FF1E                     psect	text3
+  2382                           	file	"mcc_generated_files/mcc.c"
+  2383                           	line	57
+  2384                           	global	__size_of_OSCILLATOR_Initialize
+  2385                           	__size_of_OSCILLATOR_Initialize	equ	__end_of_OSCILLATOR_Initialize-_OSCILLATOR_Initiali
+                                 ze
+  2386  0000                     	
+  2387                           _OSCILLATOR_Initialize:; BSR set to: 15
+  2388  00FF1E                     
+  2389                           ;incstack = 0
+  2390                           	opt	stack 29
+  2391                           	line	60
+  2392                           	
+  2393                           l766:
+  2394  00FF1E                     ;mcc_generated_files/mcc.c: 60:     OSCCON = 0x30;
+  2395                           	movlw	low(030h)
+  2396  00FF1E  0E30               	movwf	((c:4051)),c	;volatile
+  2397  00FF20  6ED3               	line	62
+  2398                           ;mcc_generated_files/mcc.c: 62:     OSCCON2 = 0x04;
+  2399                           	movlw	low(04h)
+  2400  00FF22  0E04               	movwf	((c:4050)),c	;volatile
+  2401  00FF24  6ED2               	line	64
+  2402                           ;mcc_generated_files/mcc.c: 64:     OSCTUNE = 0x00;
+  2403                           	movlw	low(0)
+  2404  00FF26  0E00               	movwf	((c:3995)),c	;volatile
+  2405  00FF28  6E9B               	line	65
+  2406                           	
+  2407                           l58:
+  2408  00FF2A                     	return	;funcret
+  2409  00FF2A  0012               	opt stack 0
+  2410                           GLOBAL	__end_of_OSCILLATOR_Initialize
+  2411                           	__end_of_OSCILLATOR_Initialize:
+  2412  00FF2C                     	signat	_OSCILLATOR_Initialize,89
+  2413                           	GLOBAL	__activetblptr
+  2414                           __activetblptr	EQU	0
+  2415  0000                     	psect	intsave_regs,class=BIGRAM,space=1,noexec
+  2416                           	PSECT	rparam,class=COMRAM,space=1,noexec
+  2417                           	GLOBAL	__Lrparam
+  2418                           	FNCONF	rparam,??,?
+  2419                           	GLOBAL	___rparam_used
+  2420                           	___rparam_used EQU 1
+  2421  0000                     	GLOBAL	___param_bank
+  2422                           	___param_bank EQU 0
+  2423  0000                     GLOBAL	__Lparam, __Hparam
+  2424                           GLOBAL	__Lrparam, __Hrparam
+  2425                           __Lparam	EQU	__Lrparam
+  2426  0000                     __Hparam	EQU	__Hrparam
+  2427  0000                     	end
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95      3       3
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+    BANK6           256      0       0
+    BANK7           256      0       0
+    BANK8           256      0       0
+    BANK9           256      0       0
+    BANK10          256      0       0
+    BANK11          256      0       0
+    BANK12          256      0       0
+    BANK13          256      0       0
+    BANK14          256      0       0
+    BANK15           56      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Critical Paths under _main in BANK8
+
+    None.
+
+Critical Paths under _main in BANK9
+
+    None.
+
+Critical Paths under _main in BANK10
+
+    None.
+
+Critical Paths under _main in BANK11
+
+    None.
+
+Critical Paths under _main in BANK12
+
+    None.
+
+Critical Paths under _main in BANK13
+
+    None.
+
+Critical Paths under _main in BANK14
+
+    None.
+
+Critical Paths under _main in BANK15
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 3     3      0      15
+                                              0 COMRAM     3     3      0
+                  _SYSTEM_Initialize
+ ---------------------------------------------------------------------------------
+ (1) _SYSTEM_Initialize                                    0     0      0       0
+              _OSCILLATOR_Initialize
+             _PIN_MANAGER_Initialize
+ ---------------------------------------------------------------------------------
+ (2) _PIN_MANAGER_Initialize                               0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _OSCILLATOR_Initialize                                0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _SYSTEM_Initialize
+     _OSCILLATOR_Initialize
+     _PIN_MANAGER_Initialize
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             400      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F      3       3       1        3.2%
+STACK                0      0       0       2        0.0%
+DATA                 0      0       0       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+ABS                  0      0       0      12        0.0%
+BITBANK4           100      0       0      13        0.0%
+BANK4              100      0       0      14        0.0%
+BITBANK5           100      0       0      15        0.0%
+BANK5              100      0       0      16        0.0%
+BITBANK6           100      0       0      17        0.0%
+BANK6              100      0       0      18        0.0%
+BITBANK7           100      0       0      19        0.0%
+BANK7              100      0       0      20        0.0%
+BITBANK8           100      0       0      21        0.0%
+BANK8              100      0       0      22        0.0%
+BITBANK9           100      0       0      23        0.0%
+BANK9              100      0       0      24        0.0%
+BITBANK10          100      0       0      25        0.0%
+BANK10             100      0       0      26        0.0%
+BITBANK11          100      0       0      27        0.0%
+BANK11             100      0       0      28        0.0%
+BITBANK12          100      0       0      29        0.0%
+BANK12             100      0       0      30        0.0%
+BITBANK13          100      0       0      31        0.0%
+BANK13             100      0       0      32        0.0%
+BITBANK14          100      0       0      33        0.0%
+BANK14             100      0       0      34        0.0%
+BITBANK15           38      0       0      35        0.0%
+BANK15              38      0       0      36        0.0%
+BIGRAM             F37      0       0      37        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.00 build -1524193055 
+Symbol Table                                                                                   Fri Oct  5 10:55:56 2018
+
+                             l39 FF6A                               l55 FF1C  
+                             l80 FFFC                               l73 FF74  
+                             l58 FF2A                               l74 FFDE  
+                             l75 FF96                               l76 FFC4  
+                             l77 FFF4                               l78 FFF8  
+                             l79 FFFC                               u10 FF8A  
+                             u11 FF82                               u20 FFA8  
+                             u21 FFA0                               u30 FFBE  
+                             u31 FFBA                               u40 FFF0  
+                             u41 FFEC                               u18 FF8C  
+                             u28 FFAA                               u57 FFD0  
+                   __CFG_CP0$OFF 000000                     __CFG_CP1$OFF 000000  
+                   __CFG_CP2$OFF 000000                     __CFG_CP3$OFF 000000  
+                    __CFG_LVP$ON 000000                              l760 FF4E  
+                            l762 FF50                              l764 FF68  
+                            l756 FF2C                              l780 FFB0  
+                            l772 FF6C                              l766 FF1E  
+                            l758 FF48                              l782 FFBE  
+                            l774 FF74                              l768 FF14  
+                            l784 FFC4                              l776 FF78  
+                            l786 FFCA                              l778 FF96  
+                            l788 FFDE                     __CFG_CPB$OFF 000000  
+                   __CFG_CPD$OFF 000000                              wreg 000FE8  
+                           _LATA 000F89                             _LATB 000F8A  
+                           _LATC 000F8B                             _LATD 000F8C  
+                           _LATE 000F8D                             _WPUB 000F61  
+                           _main FF6C                    __CFG_BORV$190 000000  
+                           start 0000                    __CFG_IESO$OFF 000000  
+                   ___param_bank 000000   __size_of_OSCILLATOR_Initialize 000E  
+  __end_of_OSCILLATOR_Initialize FF2C                            ?_main 0001  
+                 __CFG_DEBUG$OFF 000000                            _TRISA 000F92  
+                          _TRISB 000F93                            _TRISC 000F94  
+                          _TRISD 000F95                            _TRISE 000F96  
+                  __CFG_WRT0$OFF 000000                    __CFG_WRT1$OFF 000000  
+                  __CFG_WRT2$OFF 000000                    __CFG_WRT3$OFF 000000  
+                 __CFG_EBTR0$OFF 000000                   __CFG_FCMEN$OFF 000000  
+                 __CFG_EBTR1$OFF 000000                   __CFG_EBTR2$OFF 000000  
+                 __CFG_EBTR3$OFF 000000                    __CFG_WRTB$OFF 000000  
+                  __CFG_WRTC$OFF 000000                    __CFG_WRTD$OFF 000000  
+                 __CFG_EBTRB$OFF 000000               __CFG_MCLRE$EXTMCLR 000000  
+                          main@a 0002                            status 000FD8  
+                 __CFG_HFOFST$ON 000000                   __CFG_PBADEN$ON 000000  
+                __initialization FF0E                     __end_of_main 0000  
+                         ??_main 0001                    __activetblptr 000000  
+                         _ANSELA 000F38                           _ANSELB 000F39  
+                         _ANSELC 000F3A                           _ANSELD 000F3B  
+                         _ANSELE 000F3C                   __CFG_WDTEN$OFF 000000  
+                         _OSCCON 000FD3                   __CFG_XINST$OFF 000000  
+                 __CFG_STVREN$ON 000000                _SYSTEM_Initialize FF14  
+                     __accesstop 0060          __end_of__initialization FF0E  
+             ?_SYSTEM_Initialize 0001                    ___rparam_used 000001  
+                 __pcstackCOMRAM 0001              ??_SYSTEM_Initialize 0001  
+      __end_of_SYSTEM_Initialize FF1E                  __CFG_PLLCFG$OFF 000000  
+             __CFG_CCP2MX$PORTC1 000000               __CFG_CCP3MX$PORTB5 000000  
+                        _OSCCON2 000FD2                          _OSCTUNE 000F9B  
+                __CFG_PWRTEN$OFF 000000                          __Hparam 0000  
+                        __Lparam 0000                          __pcinit FF0E  
+                        __ramtop 1000                          __ptext0 FF6C  
+                        __ptext1 FF14                          __ptext2 FF2C  
+                        __ptext3 FF1E            _OSCILLATOR_Initialize FF1E  
+       ??_PIN_MANAGER_Initialize 0001       __size_of_SYSTEM_Initialize 000A  
+           end_of_initialization FF0E                        _PORTBbits 000F81  
+         ?_OSCILLATOR_Initialize 0001              start_initialization FF0E  
+__size_of_PIN_MANAGER_Initialize 0040           _PIN_MANAGER_Initialize FF2C  
+               __CFG_PRICLKEN$ON 000000                         _LATCbits 000F8B  
+               __CFG_WDTPS$32768 000000                      _INTCON2bits 000FF1  
+                       __Hrparam 0000                         __Lrparam 0000  
+             __CFG_BOREN$SBORDIS 000000                __CFG_P2BMX$PORTD2 000000  
+        ??_OSCILLATOR_Initialize 0001                    __size_of_main 0094  
+                     _INTCONbits 000FF2          ?_PIN_MANAGER_Initialize 0001  
+              __CFG_T3CMX$PORTC0 000000   __end_of_PIN_MANAGER_Initialize FF6C  
+              __CFG_FOSC$INTIO67 000000  
