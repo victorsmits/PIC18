@@ -1,0 +1,226 @@
+[p LITE_MODE AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F46K22 ]
+[d frameptr 4065 ]
+"81 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/mcc_generated_files/adc.c
+[e E5995 . `uc
+channel_CTMU 29
+channel_DAC 30
+channel_FVRBuf2 31
+]
+"72 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/main.c
+[e E5998 . `uc
+channel_CTMU 29
+channel_DAC 30
+channel_FVRBuf2 31
+]
+"4 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"10 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 /Applications/microchip/xc8/v2.00/pic/sources/c99/common/Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"49 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/main.c
+[v _main main `(v  1 e 1 0 ]
+"60 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/mcc_generated_files/adc.c
+[v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
+"108
+[v _ADC_GetConversion ADC_GetConversion `(us  1 e 2 0 ]
+"49 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/mcc_generated_files/ccp5.c
+[v _CCP5_Initialize CCP5_Initialize `(v  1 e 1 0 ]
+"50 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+"59
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+"57 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+"52 /Applications/microchip/xc8/v2.00/pic/include/pic18f46k22.h
+[v _ANSELA ANSELA `VEuc  1 e 1 @3896 ]
+"97
+[v _ANSELB ANSELB `VEuc  1 e 1 @3897 ]
+"147
+[v _ANSELC ANSELC `VEuc  1 e 1 @3898 ]
+"198
+[v _ANSELD ANSELD `VEuc  1 e 1 @3899 ]
+"260
+[v _ANSELE ANSELE `VEuc  1 e 1 @3900 ]
+"1936
+[v _CCP5CON CCP5CON `VEuc  1 e 1 @3924 ]
+"2007
+[v _CCPR5L CCPR5L `VEuc  1 e 1 @3925 ]
+"2027
+[v _CCPR5H CCPR5H `VEuc  1 e 1 @3926 ]
+"2719
+[v _WPUB WPUB `VEuc  1 e 1 @3937 ]
+"7560
+[v _LATA LATA `VEuc  1 e 1 @3977 ]
+"7672
+[v _LATB LATB `VEuc  1 e 1 @3978 ]
+"7784
+[v _LATC LATC `VEuc  1 e 1 @3979 ]
+"7896
+[v _LATD LATD `VEuc  1 e 1 @3980 ]
+"8008
+[v _LATE LATE `VEuc  1 e 1 @3981 ]
+"8060
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+"8282
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"8504
+[v _TRISC TRISC `VEuc  1 e 1 @3988 ]
+"8726
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+"8948
+[v _TRISE TRISE `VEuc  1 e 1 @3990 ]
+"9064
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
+"13472
+[v _ADCON2 ADCON2 `VEuc  1 e 1 @4032 ]
+"13543
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
+"13611
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
+[s S37 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_NOT_DONE 1 0 :1:1 
+]
+"13656
+[s S40 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :5:2 
+]
+[s S44 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+`uc 1 CHS4 1 0 :1:6 
+]
+[s S52 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 DONE 1 0 :1:1 
+]
+[s S55 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_DONE 1 0 :1:1 
+]
+[s S58 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S61 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[s S64 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GODONE 1 0 :1:1 
+]
+[u S67 . 1 `S37 1 . 1 0 `S40 1 . 1 0 `S44 1 . 1 0 `S52 1 . 1 0 `S55 1 . 1 0 `S58 1 . 1 0 `S61 1 . 1 0 `S64 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES67  1 e 1 @4034 ]
+"13743
+[v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
+"13763
+[v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
+"15989
+[v _OSCCON2 OSCCON2 `VEuc  1 e 1 @4050 ]
+"16046
+[v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
+[s S174 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 NOT_RBPU 1 0 :1:7 
+]
+"16881
+[s S177 . 1 `uc 1 RBIP 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 TMR0IP 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INTEDG2 1 0 :1:4 
+`uc 1 INTEDG1 1 0 :1:5 
+`uc 1 INTEDG0 1 0 :1:6 
+`uc 1 nRBPU 1 0 :1:7 
+]
+[s S186 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 RBPU 1 0 :1:7 
+]
+[u S189 . 1 `S174 1 . 1 0 `S177 1 . 1 0 `S186 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES189  1 e 1 @4081 ]
+[s S209 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"16958
+[s S218 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S227 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S231 . 1 `S209 1 . 1 0 `S218 1 . 1 0 `S227 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES231  1 e 1 @4082 ]
+"49 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"72
+[v main@Mesure Mesure `i  1 a 2 5 ]
+"74
+} 0
+"50 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+{
+"57
+} 0
+"57 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+{
+"100
+} 0
+"59 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/mcc_generated_files/mcc.c
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+{
+"67
+} 0
+"49 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/mcc_generated_files/ccp5.c
+[v _CCP5_Initialize CCP5_Initialize `(v  1 e 1 0 ]
+{
+"60
+} 0
+"60 /Users/victorsmits/MPLABXProjects/Mesure_Tension.X/mcc_generated_files/adc.c
+[v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
+{
+"79
+} 0
+"108
+[v _ADC_GetConversion ADC_GetConversion `(us  1 e 2 0 ]
+{
+[v ADC_GetConversion@channel channel `E5995  1 a 1 wreg ]
+[v ADC_GetConversion@channel channel `E5995  1 a 1 wreg ]
+"111
+[v ADC_GetConversion@channel channel `E5995  1 a 1 4 ]
+"126
+} 0
